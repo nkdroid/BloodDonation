@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="@android:colorPrimary">@color/primaryColor</item>
+        <item name="@android:colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="@android:drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="@android:colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="@android:spinBars">true</item>
+        <item name="@android:color">@android:color/white</item>
+
+    </style>
+
+</resources>
