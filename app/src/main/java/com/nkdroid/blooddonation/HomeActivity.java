@@ -71,7 +71,7 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
 
     private void setImageSlider() {
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
-        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+
 
         HashMap<String,String> url_maps = new HashMap<String, String>();
         url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
