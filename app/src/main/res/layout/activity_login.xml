@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    tools:context="com.nkdroid.registrationlogin.LoginActivity">
+
+    <TextView
+        android:text="Login Form"
+        android:textSize="22sp"
+        android:textColor="#494949"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_marginTop="8dp"
+            android:hint="Enter Username"
+            android:textSize="22sp"
+            android:textColor="#494949"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_marginTop="8dp"
+            android:hint="Enter Password"
+            android:textSize="22sp"
+            android:textColor="#494949"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btnLogin"
+            android:layout_marginTop="8dp"
+            android:text="Login"
+            android:textSize="22sp"
+            android:textColor="#494949"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnNewRegistration"
+        android:layout_marginTop="8dp"
+        android:text="New Registration"
+        android:textSize="22sp"
+        android:textColor="#494949"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

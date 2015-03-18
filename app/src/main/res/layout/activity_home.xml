@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="com.nkdroid.registrationlogin.LoginActivity">
+
+    <include layout="@layout/app_bar"/>
+
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btnLogout"
+            android:layout_marginTop="8dp"
+            android:text="Logout"
+            android:textSize="22sp"
+            android:textColor="#494949"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>
