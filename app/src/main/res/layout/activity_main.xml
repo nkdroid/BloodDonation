@@ -6,13 +6,33 @@
 
     <include layout="@layout/app_bar" />
 
-
-    <TextView
-        android:text="Hello Lollipop"
-        android:textSize="22sp"
-        android:textColor="#494949"
-        android:gravity="center"
-        android:padding="16dp"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+
+        <!-- activity view -->
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EAEAEA">
+        </FrameLayout>
+
+        <!-- navigation drawer -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|start">
+            <ListView
+                android:id="@+id/left_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:divider="#ccc"
+                android:dividerHeight="1dp"
+             />
+        </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
+
     </LinearLayout>

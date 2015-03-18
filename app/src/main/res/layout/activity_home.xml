@@ -8,16 +8,60 @@
 
     <include layout="@layout/app_bar"/>
 
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/btnLogout"
-            android:layout_marginTop="8dp"
-            android:text="Logout"
-            android:textSize="22sp"
-            android:textColor="#494949"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!-- activity view -->
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EAEAEA">
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                />
+            <com.daimajia.slider.library.Indicators.PagerIndicator
+                android:id="@+id/custom_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+
+            <Button
+               android:layout_gravity="bottom|center_horizontal"
+                android:id="@+id/btnLogout"
+                android:layout_marginTop="8dp"
+                android:text="Logout"
+                android:textSize="22sp"
+                android:textColor="#494949"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+
+
+
+        <!-- navigation drawer -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|start">
+            <ListView
+                android:id="@+id/left_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:divider="#ccc"
+                android:dividerHeight="1dp"
+                />
+        </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
+
+
 
 </LinearLayout>
