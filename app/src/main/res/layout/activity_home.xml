@@ -48,6 +48,7 @@
 
         <!-- navigation drawer -->
         <RelativeLayout
+            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left|start">
