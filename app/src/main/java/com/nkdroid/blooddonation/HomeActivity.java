@@ -50,12 +50,12 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
 //    private ArrayAdapter<String> navigationDrawerAdapter;
     private String[] leftSliderData = {"Home",
             "Profile", "About Us", "Contact Us", "Settings", "Logout"};
-    private int[] imagelist = {R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher};
+    private int[] imagelist = {R.drawable.ic_action_store,
+            R.drawable.ic_social_person,
+            R.drawable.ic_social_people_outline,
+            R.drawable.ic_communication_phone,
+            R.drawable.ic_action_settings_applications,
+            R.drawable.ic_action_launch};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
