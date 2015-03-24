@@ -3,6 +3,7 @@ package com.nkdroid.blooddonation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends ActionBarActivity {
-
+    private Toolbar toolbar;
     private EditText etUsername,etPassword;
     private Button btnLogin,btnNewRegistration;
     @Override
@@ -44,13 +45,13 @@ public class LoginActivity extends ActionBarActivity {
                     User user=PrefUtils.getLoggedIn(LoginActivity.this);
                     PrefUtils.setLoggedIn(LoginActivity.this,true,user.getUsername(),user.getPassword());
                     Log.e("username", user.getUsername()+"");
-                    if( user.getUsername().equals(etUsername.getText().toString().trim()) && user.getPassword().equals(etPassword.getText().toString().trim())){
+                   // if( user.getUsername().equals(etUsername.getText().toString().trim()) && user.getPassword().equals(etPassword.getText().toString().trim())){
                         Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);
                         finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this,"Please Enter Valid Username or Password",Toast.LENGTH_LONG).show();
-                    }
+                    //} else {
+                      //  Toast.makeText(LoginActivity.this,"Please Enter Valid Username or Password",Toast.LENGTH_LONG).show();
+                    //}
 
                 }
             }
@@ -59,7 +60,7 @@ public class LoginActivity extends ActionBarActivity {
         btnNewRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this,RegistrationActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
 
                 startActivity(intent);
                 finish();
@@ -67,7 +68,14 @@ public class LoginActivity extends ActionBarActivity {
         });
 
     }
-
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle("LOGIN");
+            toolbar.setBackgroundColor( -65536);
+            setSupportActionBar(toolbar);
+        }
+    }
 
     public boolean isEmptyField(EditText param1) {
 

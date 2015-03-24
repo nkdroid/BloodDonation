@@ -49,9 +49,11 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
 
 //    private ArrayAdapter<String> navigationDrawerAdapter;
     private String[] leftSliderData = {"Home",
-            "Profile", "About Us", "Contact Us", "Settings", "Logout"};
+            "Profile", "Inbox", "Request", "About Us", "Contact Us", "Settings", "Logout"};
     private int[] imagelist = {R.drawable.ic_action_store,
             R.drawable.ic_social_person,
+            R.drawable.ic_social_plus_one,
+            R.drawable.ic_action_invert_colors,
             R.drawable.ic_social_people_outline,
             R.drawable.ic_communication_phone,
             R.drawable.ic_action_settings_applications,
@@ -74,17 +76,17 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
 
 
         HashMap<String,String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+        url_maps.put("Image-1", "http://www.google.co.in/imgres?imgurl=http://previews.123rf.com/images/gigello/gigello1306/gigello130600041/20667270-Blood-donation-Medical-background-Stock-Vector.jpg&imgrefurl=http://www.123rf.com/photo_20667270_blood-donation-medical-background.html&h=1300&w=1300&tbnid=iIQ0C_qyCBxPIM:&zoom=1&docid=mpvmP3uuTlJIWM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CGkQMyhDMEM");
+        url_maps.put("Image-2", "http://www.google.co.in/imgres?imgurl=http://www.blufftonicon.com/sites/default/files/images/articles/2013/7385-next-red-cross-blood-drive-feb.7-first-mennonite.jpeg&imgrefurl=http://www.blufftonicon.com/news/2013/01/18/next-red-cross-blood-drive-feb-7-first-mennonite&h=151&w=335&tbnid=Iojc6hiEZpiBfM:&zoom=1&docid=idgkUKE_uAm1vM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CEwQMygmMCY");
+        url_maps.put("Image-3", "http://www.google.co.in/imgres?imgurl=http://www.karaikudiblooddonors.com/images/donor-icon.gif&imgrefurl=http://www.karaikudiblooddonors.com/viewrequester.php?id%3D18&h=60&w=197&tbnid=bwOFb9E-TC12fM:&zoom=1&docid=hBq_aFYVQusujM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CGIQMyg8MDw");
+        url_maps.put("Image-4", "http://www.google.co.in/imgres?imgurl=http://files.smashingmagazine.com/wallpapers/june-13/someone-needing-blood-somewhere/jun-13-donate_blood-preview.jpg&imgrefurl=http://www.nebraskadigital.com/category/smashing/page/34/&h=281&w=500&tbnid=oTMrEPfnHNhgHM:&zoom=1&docid=XEQo-4i7jlJzVM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CHgQMyhSMFI");
 
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Hannibal",R.mipmap.ic_launcher);
-        file_maps.put("Big Bang Theory",R.mipmap.ic_launcher);
-        file_maps.put("House of Cards",R.mipmap.ic_launcher);
-        file_maps.put("Game of Thrones", R.mipmap.ic_launcher);
+        file_maps.put("Image-1",R.mipmap.ic_launcher);
+        file_maps.put("Image-2",R.mipmap.ic_launcher);
+        file_maps.put("Image-3",R.mipmap.ic_launcher);
+        file_maps.put("Image-4", R.mipmap.ic_launcher);
 
 
         for(String name : url_maps.keySet()){
@@ -128,6 +130,7 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitle("HOME");
+            toolbar.setBackgroundColor( -65536);
             setSupportActionBar(toolbar);
         }
     }
