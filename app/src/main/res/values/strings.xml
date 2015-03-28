@@ -5,4 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+    <string name="date">Date</string>
+    <string name="title">Title</string>
+    <string name="des">Description</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>
