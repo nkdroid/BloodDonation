@@ -10,4 +10,9 @@
     <string name="title">Title</string>
     <string name="des">Description</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_inbox">InboxActivity</string>
+    <string name="title_activity_request">RequestActivity</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="title_activity_contact_us">ContactUsActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
 </resources>

@@ -305,7 +305,22 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
                     } else if (position == 1) {
                         Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                         startActivity(intent);
-                    } else if (position == 7) {
+                    }else if (position == 2) {
+                        Intent intent = new Intent(HomeActivity.this, InboxActivity.class);
+                        startActivity(intent);
+                    }else if (position == 3) {
+                        Intent intent = new Intent(HomeActivity.this, RequestActivity.class);
+                        startActivity(intent);
+                    }else if (position == 4) {
+                        Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
+                        startActivity(intent);
+                    }else if (position == 5) {
+                        Intent intent = new Intent(HomeActivity.this, ContactUsActivity.class);
+                        startActivity(intent);
+                    }else if (position == 6) {
+                        Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+                        startActivity(intent);
+                    }else if (position == 7) {
                         PrefUtils.clearLogin(HomeActivity.this);
                         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(intent);
