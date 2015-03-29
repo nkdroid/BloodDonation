@@ -45,16 +45,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Button
+        <TextView
             android:layout_gravity="center"
             android:id="@+id/btnLogin"
             android:layout_marginTop="8dp"
             android:text="Login"
             android:textSize="22sp"
-            android:textColor="#494949"
+            android:textColor="#FFFFFFFF"
             android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_tab_pink"/>
     </LinearLayout>
     <Button
         android:layout_alignParentBottom="true"

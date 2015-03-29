@@ -214,7 +214,6 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitle("HOME");
-            toolbar.setBackgroundColor(-65536);
             setSupportActionBar(toolbar);
         }
     }

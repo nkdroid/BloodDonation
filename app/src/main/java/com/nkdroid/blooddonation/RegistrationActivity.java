@@ -66,7 +66,6 @@ public class RegistrationActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitle("REGISTER");
-            toolbar.setBackgroundColor( -65536);
             setSupportActionBar(toolbar);
         }
     }

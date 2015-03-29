@@ -25,7 +25,6 @@ public class ContactUsActivity extends ActionBarActivity {
         if (toolbar != null) {
 
             toolbar.setTitle("Contact Us");
-            toolbar.setBackgroundColor(-65536);
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -25,7 +25,6 @@ public class SettingActivity extends ActionBarActivity {
         if (toolbar != null) {
 
             toolbar.setTitle("Setting");
-            toolbar.setBackgroundColor(-65536);
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {

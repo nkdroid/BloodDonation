@@ -23,7 +23,6 @@ public class RequestActivity extends ActionBarActivity {
         if (toolbar != null) {
 
             toolbar.setTitle("Request Blood");
-            toolbar.setBackgroundColor(-65536);
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:exitFadeDuration="@android:integer/config_shortAnimTime">
+
+    <item android:state_pressed="true" android:drawable="@drawable/ed_rounded_pink_selected_color" />
+    <item android:state_focused="true" android:drawable="@drawable/ed_rounded_pink_color"/>
+    <item android:drawable="@drawable/ed_rounded_pink_color"/>
+
+</selector>

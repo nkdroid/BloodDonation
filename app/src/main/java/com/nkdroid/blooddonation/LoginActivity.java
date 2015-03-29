@@ -8,13 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class LoginActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private EditText etUsername,etPassword;
-    private Button btnLogin,btnNewRegistration;
+    private Button btnNewRegistration;
+    private TextView btnLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class LoginActivity extends ActionBarActivity {
     private void initView() {
         etUsername= (EditText) findViewById(R.id.etUsername);
         etPassword= (EditText) findViewById(R.id.etPassword);
-        btnLogin= (Button) findViewById(R.id.btnLogin);
+        btnLogin= (TextView) findViewById(R.id.btnLogin);
         btnNewRegistration= (Button) findViewById(R.id.btnNewRegistration);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +74,6 @@ public class LoginActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitle("LOGIN");
-            toolbar.setBackgroundColor( -65536);
             setSupportActionBar(toolbar);
         }
     }

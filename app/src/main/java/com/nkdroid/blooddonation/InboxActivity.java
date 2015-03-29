@@ -1,5 +1,6 @@
 package com.nkdroid.blooddonation;
 
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +23,6 @@ public class InboxActivity extends ActionBarActivity {
         if (toolbar != null) {
 
             toolbar.setTitle("Inbox");
-            toolbar.setBackgroundColor(-65536);
             setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
