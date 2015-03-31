@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 />
+
             <ListView
                 android:layout_marginTop="200dp"
                 android:layout_width="match_parent"
