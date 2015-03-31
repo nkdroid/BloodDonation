@@ -169,26 +169,26 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
 
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put("Image-1", "http://www.google.co.in/imgres?imgurl=http://previews.123rf.com/images/gigello/gigello1306/gigello130600041/20667270-Blood-donation-Medical-background-Stock-Vector.jpg&imgrefurl=http://www.123rf.com/photo_20667270_blood-donation-medical-background.html&h=1300&w=1300&tbnid=iIQ0C_qyCBxPIM:&zoom=1&docid=mpvmP3uuTlJIWM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CGkQMyhDMEM");
-        url_maps.put("Image-2", "http://www.google.co.in/imgres?imgurl=http://www.blufftonicon.com/sites/default/files/images/articles/2013/7385-next-red-cross-blood-drive-feb.7-first-mennonite.jpeg&imgrefurl=http://www.blufftonicon.com/news/2013/01/18/next-red-cross-blood-drive-feb-7-first-mennonite&h=151&w=335&tbnid=Iojc6hiEZpiBfM:&zoom=1&docid=idgkUKE_uAm1vM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CEwQMygmMCY");
-        url_maps.put("Image-3", "http://www.google.co.in/imgres?imgurl=http://www.karaikudiblooddonors.com/images/donor-icon.gif&imgrefurl=http://www.karaikudiblooddonors.com/viewrequester.php?id%3D18&h=60&w=197&tbnid=bwOFb9E-TC12fM:&zoom=1&docid=hBq_aFYVQusujM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CGIQMyg8MDw");
-        url_maps.put("Image-4", "http://www.google.co.in/imgres?imgurl=http://files.smashingmagazine.com/wallpapers/june-13/someone-needing-blood-somewhere/jun-13-donate_blood-preview.jpg&imgrefurl=http://www.nebraskadigital.com/category/smashing/page/34/&h=281&w=500&tbnid=oTMrEPfnHNhgHM:&zoom=1&docid=XEQo-4i7jlJzVM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CHgQMyhSMFI");
+     //   HashMap<String, String> url_maps = new HashMap<String, String>();
+      //  url_maps.put("Image-1", "http://www.google.co.in/imgres?imgurl=http://previews.123rf.com/images/gigello/gigello1306/gigello130600041/20667270-Blood-donation-Medical-background-Stock-Vector.jpg&imgrefurl=http://www.123rf.com/photo_20667270_blood-donation-medical-background.html&h=1300&w=1300&tbnid=iIQ0C_qyCBxPIM:&zoom=1&docid=mpvmP3uuTlJIWM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CGkQMyhDMEM");
+      //  url_maps.put("Image-2", "http://www.google.co.in/imgres?imgurl=http://www.blufftonicon.com/sites/default/files/images/articles/2013/7385-next-red-cross-blood-drive-feb.7-first-mennonite.jpeg&imgrefurl=http://www.blufftonicon.com/news/2013/01/18/next-red-cross-blood-drive-feb-7-first-mennonite&h=151&w=335&tbnid=Iojc6hiEZpiBfM:&zoom=1&docid=idgkUKE_uAm1vM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CEwQMygmMCY");
+      //  url_maps.put("Image-3", "http://www.google.co.in/imgres?imgurl=http://www.karaikudiblooddonors.com/images/donor-icon.gif&imgrefurl=http://www.karaikudiblooddonors.com/viewrequester.php?id%3D18&h=60&w=197&tbnid=bwOFb9E-TC12fM:&zoom=1&docid=hBq_aFYVQusujM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CGIQMyg8MDw");
+      //  url_maps.put("Image-4", "http://www.google.co.in/imgres?imgurl=http://files.smashingmagazine.com/wallpapers/june-13/someone-needing-blood-somewhere/jun-13-donate_blood-preview.jpg&imgrefurl=http://www.nebraskadigital.com/category/smashing/page/34/&h=281&w=500&tbnid=oTMrEPfnHNhgHM:&zoom=1&docid=XEQo-4i7jlJzVM&ei=kTcRVcPnFZHk8AX6-ILYCQ&tbm=isch&ved=0CHgQMyhSMFI");
 
 
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Image-1", R.mipmap.ic_launcher);
-        file_maps.put("Image-2", R.mipmap.ic_launcher);
-        file_maps.put("Image-3", R.mipmap.ic_launcher);
-        file_maps.put("Image-4", R.mipmap.ic_launcher);
+        file_maps.put("image-1", R.drawable.image1);
+        file_maps.put("image-2", R.drawable.image2);
+        file_maps.put("image-3", R.drawable.image3);
+        file_maps.put("image-4", R.drawable.image4);
 
 
-        for (String name : url_maps.keySet()) {
+        for (String name : file_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
                     .description(name)
-                    .image(url_maps.get(name))
+                    .image(file_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
 

@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class LoginActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private EditText etUsername,etPassword;
-    private Button btnNewRegistration;
+    private TextView btnNewRegistration;
     private TextView btnLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +27,18 @@ public class LoginActivity extends ActionBarActivity {
             startActivity(intent);
             finish();
         }
+        setToolbar();
         initView();
     }
+
+
+
 
     private void initView() {
         etUsername= (EditText) findViewById(R.id.etUsername);
         etPassword= (EditText) findViewById(R.id.etPassword);
         btnLogin= (TextView) findViewById(R.id.btnLogin);
-        btnNewRegistration= (Button) findViewById(R.id.btnNewRegistration);
+        btnNewRegistration= (TextView) findViewById(R.id.btnNewRegistration);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

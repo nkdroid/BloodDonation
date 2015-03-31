@@ -1,5 +1,7 @@
 package com.nkdroid.blooddonation;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Build;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
@@ -8,11 +10,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.Calendar;
 
 
-public class ProfileActivity extends ActionBarActivity {
+public class ProfileActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener
+{
+   // private DatePicker bdatepicker;
+   // private TextView time;
+   // private Calendar calendar;
+   // private String format = "";
 
     private Toolbar toolbar;
+
+
+    String [] bgroup = {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +38,23 @@ public class ProfileActivity extends ActionBarActivity {
 
         setToolbar();
 
-    }
+        Spinner spin = (Spinner) findViewById(R.id.spinbgroup);
+        spin.setOnItemSelectedListener(this);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, bgroup);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
 
+/*        bdatepicker = (DatePicker) findViewById(R.id.bdatepicker);
+       // time = (TextView) findViewById(R.id);
+        calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DATE);
+        int mon = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        //showTime(hour, min);
+
+
+*/
+    }
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -36,6 +69,16 @@ public class ProfileActivity extends ActionBarActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

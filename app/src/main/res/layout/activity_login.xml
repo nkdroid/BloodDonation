@@ -2,21 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
 
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
 
+    android:background="@drawable/background"
     tools:context="com.nkdroid.registrationlogin.LoginActivity">
 
-    <TextView
-        android:text="Login Form"
-        android:textSize="22sp"
-        android:textColor="#494949"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/app_bar"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="100dp">
+
+
     <LinearLayout
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
@@ -30,7 +29,8 @@
             android:hint="Enter Username"
             android:singleLine="true"
             android:textSize="22sp"
-            android:textColor="#494949"
+            android:textColorHint="#000000"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -40,8 +40,9 @@
             android:hint="Enter Password"
             android:singleLine="true"
             android:password="true"
+            android:textColorHint="#000000"
             android:textSize="22sp"
-            android:textColor="#494949"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -51,21 +52,26 @@
             android:layout_marginTop="8dp"
             android:text="Login"
             android:textSize="22sp"
-            android:textColor="#FFFFFFFF"
+            android:textColor="#FFFFFF"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:background="@drawable/background_tab_pink"/>
     </LinearLayout>
-    <Button
+</LinearLayout>
+    <TextView
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/btnNewRegistration"
         android:layout_marginTop="8dp"
         android:text="New Registration"
         android:textSize="22sp"
-        android:textColor="#494949"
+        android:textColor="#FFFFFFFF"
         android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/background_tab_pink"/>
+
 </RelativeLayout>
