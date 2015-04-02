@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
 
     tools:context="com.nkdroid.blooddonation.ProfileActivity">
@@ -8,171 +8,175 @@
     <include layout="@layout/app_bar"/>
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
 
     android:background="@drawable/background">
 
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="20dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvname"
-        android:hint="Name: "
-        android:textColorHint="#000000"
-        android:textSize="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvname"
+            android:hint="Name: "
+            android:textColorHint="#000000"
+            android:textSize="20dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etname"
-        android:hint="Niti Choksi"
-        android:textColorHint="#000000"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etname"
+            android:hint="Niti Choksi"
+            android:textColorHint="#000000"/>
+
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvbdate"
+                android:hint="Birth Date: "
+                android:textColorHint="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etdatepicker"/>
 
 
         </LinearLayout>
 
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvbdate"
-            android:hint="Birth Date: "
-            android:textColorHint="#000000"
-            android:textSize="20dp" />
-
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/etdatepicker"/>
-
-
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bgroup"
-            android:hint="Blood Group : "
-            android:textColorHint="#000000"
-            android:textSize="20dp" />
-
-     <Spinner
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/spinbgroup"
-         android:scrollbarAlwaysDrawVerticalTrack="@bool/abc_action_bar_expanded_action_views_exclusive"
-         android:theme="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
-
-     </Spinner>
-
-
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvlocation"
-            android:hint="Location : "
-            android:textColorHint="#000000"
-            android:textSize="20dp" />
-
-        <EditText
+        <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Baroda"
-            android:id="@+id/etlocation"
-            android:textColorHint="#000000"/>
-</LinearLayout>
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bgroup"
+                android:hint="Blood Group : "
+                android:textColorHint="#000000"
+                android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvemail"
-            android:hint="Email : "
-            android:textColorHint="#000000"
-            android:textSize="20dp" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinbgroup"
+                android:scrollbarAlwaysDrawVerticalTrack="@bool/abc_action_bar_expanded_action_views_exclusive"
+                android:theme="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
 
-        <EditText
+            </Spinner>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="niti1511@gmail.com"
-            android:id="@+id/etemail"
-            android:textColorHint="#000000"/>
-</LinearLayout>
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvlocation"
+                android:hint="Location : "
+                android:textColorHint="#000000"
+                android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvphone"
-            android:hint="Phone : "
-            android:textColorHint="#000000"
-            android:textSize="20dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Baroda"
+                android:id="@+id/etlocation"
+                android:textColorHint="#000000"/>
+        </LinearLayout>
 
-        <EditText
+        <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:hint="8140535978"
-            android:id="@+id/etphone"
-            android:textColorHint="#000000"/>
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvemail"
+                android:hint="Email : "
+                android:textColorHint="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="niti1511@gmail.com"
+                android:id="@+id/etemail"
+                android:textColorHint="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvphone"
+                android:hint="Phone : "
+                android:textColorHint="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:hint="8140535978"
+                android:id="@+id/etphone"
+                android:textColorHint="#000000"/>
+
+        </LinearLayout>
 
 
-    <TextView
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btnUpdate"
-        android:layout_marginTop="18dp"
-        android:layout_gravity="center"
-        android:text="Update Profile"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@drawable/background_tab_pink"/>
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btnUpdate"
+            android:layout_marginTop="18dp"
+            android:layout_gravity="center"
+            android:text="Update Profile"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/background_tab_pink"/>
 
 </LinearLayout>
 </ScrollView>

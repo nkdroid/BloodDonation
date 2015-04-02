@@ -57,9 +57,9 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
     private String PROJECT_NUMBER = "92884720384";
 
     //    private ArrayAdapter<String> navigationDrawerAdapter;
-    private String[] leftSliderData = {"Home",
+    private String[] leftSliderData = {"Search",
             "Profile", "Inbox", "Request", "About Us", "Contact Us", "Settings", "Logout"};
-    private int[] imagelist = {R.drawable.ic_action_store,
+    private int[] imagelist = {R.drawable.ic_action_search,
             R.drawable.ic_social_person,
             R.drawable.ic_social_plus_one,
             R.drawable.ic_action_invert_colors,
@@ -298,10 +298,9 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
                 @Override
                 public void onClick(View v) {
                     if (position == 0) {
-                        Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                         startActivity(intent);
-                        finish();
-                    } else if (position == 1) {
+                    }else if (position == 1) {
                         Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                         startActivity(intent);
                     }else if (position == 2) {
@@ -393,26 +392,6 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
         Toast.makeText(this, baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.search_bar) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 }

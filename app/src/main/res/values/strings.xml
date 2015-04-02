@@ -15,4 +15,5 @@
     <string name="title_activity_about_us">AboutUsActivity</string>
     <string name="title_activity_contact_us">ContactUsActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>
