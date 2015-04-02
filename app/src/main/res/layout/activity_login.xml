@@ -49,12 +49,12 @@
         <TextView
             android:layout_gravity="center"
             android:id="@+id/btnLogin"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:text="Login"
             android:textSize="22sp"
             android:textColor="#FFFFFF"
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:background="@drawable/background_tab_pink"/>
@@ -65,6 +65,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/btnNewRegistration"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
         android:text="New Registration"
         android:textSize="22sp"
         android:textColor="#FFFFFFFF"
