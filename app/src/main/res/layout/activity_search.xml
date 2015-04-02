@@ -4,6 +4,7 @@
     tools:context="com.nkdroid.blooddonation.ProfileActivity">
 
     <include layout="@layout/app_bar"/>
+
     <ListView
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
