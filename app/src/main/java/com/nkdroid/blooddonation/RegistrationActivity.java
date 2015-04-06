@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
 public class RegistrationActivity extends ActionBarActivity {
+    String[] bgrp= {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
     private Toolbar toolbar;
-    private EditText etUsername,etPassword;
-    private Button btnRegistration;
+    private EditText name,cntct,email,cityname,areacode;
+    private Button btnContinue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,25 +29,46 @@ public class RegistrationActivity extends ActionBarActivity {
 
 
     private void initView() {
-        etUsername= (EditText) findViewById(R.id.etUsername);
-        etPassword= (EditText) findViewById(R.id.etPassword);
-        btnRegistration= (Button) findViewById(R.id.btnRegister);
+        Spinner spin = (Spinner) findViewById(R.id.spbg);
+        spin.setOnItemSelectedListener((AdapterView.OnItemSelectedListener)this);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, bgrp);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
 
 
-        btnRegistration.setOnClickListener(new View.OnClickListener() {
+        name= (EditText) findViewById(R.id.fname);
+       cntct= (EditText) findViewById(R.id.contact);
+        email= (EditText) findViewById(R.id.email);
+        cityname= (EditText) findViewById(R.id.area);
+        areacode= (EditText) findViewById(R.id.areacode);
+
+        btnContinue= (Button) findViewById(R.id.btncont);
+
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEmptyField(etUsername)) {
-                    Toast.makeText(RegistrationActivity.this, "Please Enter Username", Toast.LENGTH_LONG).show();
-                } else if (isEmptyField(etPassword)) {
-                    Toast.makeText(RegistrationActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
-                } else {
+                if (isEmptyField(name)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
+                } else if (isEmptyField(cntct)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Contact", Toast.LENGTH_LONG).show();
+                }
+                else if (isEmptyField(email)) {
+                        Toast.makeText(RegistrationActivity.this, "Please Enter EMail", Toast.LENGTH_LONG).show();
+                }
+                else if (isEmptyField(cityname)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter City Name", Toast.LENGTH_LONG).show();
+                }
+                else if (isEmptyField(areacode)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Area Code", Toast.LENGTH_LONG).show();
+                }
+                    else {
 
                     //store in shared preference
-                    PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
-                    Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
+                   // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
+                    //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
 
-                    startActivity(intent);
+                   // startActivity(intent);
                     finish();
 
                 }

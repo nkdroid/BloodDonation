@@ -6,14 +6,10 @@
     tools:context="com.nkdroid.blooddonation.ProfileActivity">
 
     <include layout="@layout/app_bar"/>
-<<<<<<< HEAD
+
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-=======
-
->>>>>>> origin/master
-
+    android:layout_height="wrap_content"/>
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +19,6 @@
 
 
     <LinearLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -36,33 +31,27 @@
             android:textColorHint="#000000"
             android:textSize="20dp" />
 
-<<<<<<< HEAD
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/etname"
             android:hint="Niti Choksi"
             android:textColorHint="#000000"/>
-=======
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/etdatepicker"
     android:textColorHint="#000000"/>
 
->>>>>>> origin/master
-
 
     </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="20dp">
 
-<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,12 +59,11 @@
                 android:hint="Birth Date: "
                 android:textColorHint="#000000"
                 android:textSize="20dp" />
-=======
      <Spinner
          android:layout_width="wrap_content"
          android:layout_height="30dp"
          android:id="@+id/spinbgroup">
->>>>>>> origin/master
+         </Spinner>
 
             <EditText
                 android:layout_width="match_parent"
@@ -86,7 +74,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -182,8 +169,6 @@
 
         </LinearLayout>
 
-
-<<<<<<< HEAD
         <TextView
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -198,22 +183,6 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:background="@drawable/background_tab_pink"/>
-=======
-    <TextView
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btnUpdate"
-        android:layout_marginTop="80dp"
-        android:layout_gravity="center"
-        android:text="Update Profile"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@drawable/background_tab_pink"/>
->>>>>>> origin/master
 
 </LinearLayout>
 
