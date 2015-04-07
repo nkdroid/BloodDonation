@@ -4,6 +4,7 @@
     <color name="primaryColor">#FF0000</color>
     <color name="primaryColorDark">#FFD70000</color>
     <color name="colorAccent">#0D47A1</color>
+    <color name="background_tab_pressed">#1AFFFFFF</color>
 
 
 

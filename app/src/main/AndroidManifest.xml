@@ -89,6 +89,18 @@
             android:name=".SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
+        <activity
+            android:name=".FragmentOne"
+            android:label="@string/title_activity_fragment_one" >
+        </activity>
+        <activity
+            android:name=".FragmentTwo"
+            android:label="@string/title_activity_fragment_two" >
+        </activity>
+        <activity
+            android:name=".PagerSlidingTabStrip"
+            android:label="@string/title_activity_pager_sliding_tab_strip" >
+        </activity>
     </application>
 
 </manifest>
