@@ -2,8 +2,10 @@ package com.nkdroid.blooddonation;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class SearchActivity extends ActionBarActivity {
@@ -59,12 +62,15 @@ public class SearchActivity extends ActionBarActivity {
 
         Context context;
         ArrayList<String> postArrayList;
+        ArrayList<String> arraylist;
 
 
         public PostAdapter(Context context, ArrayList<String> postArrayList) {
 
             this.context = context;
             this.postArrayList = postArrayList;
+            arraylist = new ArrayList<String>();
+            arraylist.addAll(postArrayList);
         }
 
         public int getCount() {
@@ -78,6 +84,8 @@ public class SearchActivity extends ActionBarActivity {
         public long getItemId(int position) {
             return position;
         }
+
+
 
         class ViewHolder {
             TextView txtPostTitle,txtPostDate,txtPostDescription;
@@ -105,8 +113,28 @@ public class SearchActivity extends ActionBarActivity {
 
             return convertView;
         }
+        // Filter Class
+        public void filter(String charText) {
 
+            charText = charText.toLowerCase(Locale.getDefault());
+
+            postArrayList.clear();
+            if (charText.length() == 0) {
+                postArrayList.addAll(arraylist);
+
+            } else {
+                for (String movieDetails : arraylist) {
+                    if (charText.length() != 0 && movieDetails.toLowerCase(Locale.getDefault()).contains(charText)) {
+                        postArrayList.add(movieDetails);
+                    }
+
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
+
+
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -124,8 +152,50 @@ public class SearchActivity extends ActionBarActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        //*** setOnQueryTextFocusChangeListener ***
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                Toast.makeText(MainActivity.this, "called", Toast.LENGTH_SHORT).show();
+
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String searchQuery) {
+                postAdapter.filter(searchQuery.toString().trim());
+                postListView.invalidate();
+                return true;
+            }
+        });
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                // Do something when collapsed
+                return true;  // Return true to collapse action view
+            }
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                // Do something when expanded
+                return true;  // Return true to expand action view
+            }
+        });
         return true;
     }
 
@@ -143,4 +213,7 @@ public class SearchActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

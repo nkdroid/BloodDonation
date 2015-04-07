@@ -2,6 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.nkdroid.blooddonation.SearchActivity">
-    <item android:id="@+id/search_bar" android:title="Search"
-    android:icon="@drawable/ic_action_search1" app:showAsAction="always" />
+    <item android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_action_search1"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:layout_width="wrap_content" />
+
 </menu>

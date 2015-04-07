@@ -9,8 +9,8 @@
 
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    
+    android:layout_height="wrap_content"/>
+
 
     <LinearLayout
     android:layout_width="match_parent"
@@ -39,6 +39,7 @@
             android:id="@+id/etname"
             android:hint="Niti Choksi"
             android:textColorHint="#000000"/>
+
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -46,9 +47,11 @@
     android:textColorHint="#000000"/>
 
 
+
     </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -61,21 +64,24 @@
                 android:hint="Birth Date: "
                 android:textColorHint="#000000"
                 android:textSize="20dp" />
-     <Spinner
-         android:layout_width="wrap_content"
-         android:layout_height="30dp"
-         android:id="@+id/spinbgroup">
-         </Spinner>
+
+<Spinner
+    android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:id="@+id/spinbgroup1">
+
+</Spinner>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/etdatepicker"/>
+                android:id="@+id/etdatepicker1"/>
 
 
         </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -102,6 +108,7 @@
         </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -124,6 +131,7 @@
         </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -185,8 +193,11 @@
             android:padding="16dp"
             android:background="@drawable/background_tab_pink"/>
 
+
+
+
 </LinearLayout>
-</ScrollView>
+
 </LinearLayout>
 
 
