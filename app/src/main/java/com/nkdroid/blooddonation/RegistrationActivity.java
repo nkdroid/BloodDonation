@@ -10,18 +10,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class RegistrationActivity extends ActionBarActivity {
+public class RegistrationActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
     String[] bgrp= {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
     private Toolbar toolbar;
     private EditText name,cntct,email,cityname,areacode;
-    private Button btnContinue;
+    private TextView btnContinue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        setToolbar();
+
+        Spinner spin = (Spinner) findViewById(R.id.spbg);
+        spin.setOnItemSelectedListener(this);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item,bgrp);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
 
         initView();
     }
@@ -29,21 +37,12 @@ public class RegistrationActivity extends ActionBarActivity {
 
 
     private void initView() {
-        Spinner spin = (Spinner) findViewById(R.id.spbg);
-        spin.setOnItemSelectedListener((AdapterView.OnItemSelectedListener)this);
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, bgrp);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aa);
-
-
         name= (EditText) findViewById(R.id.fname);
        cntct= (EditText) findViewById(R.id.contact);
         email= (EditText) findViewById(R.id.email);
         cityname= (EditText) findViewById(R.id.area);
         areacode= (EditText) findViewById(R.id.areacode);
-
-        btnContinue= (Button) findViewById(R.id.btncont);
-
+        btnContinue= (TextView)findViewById(R.id.btncont);
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,5 +100,15 @@ public class RegistrationActivity extends ActionBarActivity {
 
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
