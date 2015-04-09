@@ -7,7 +7,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 
 public class ProfileActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener
@@ -29,18 +26,21 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
    // private TextView time;
    // private Calendar calendar;
    // private String format = "";
-
+   private EditText et;
     private Toolbar toolbar;
-    private EditText bdate;
-    private DatePickerDialog bDatePicker;
-    private SimpleDateFormat dateFormatter;
+    private int year;
+    private int month;
+    private int day;
+
+
+    static final int DATE_PICKER_ID = 1111;
     String [] bgroup = {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2);
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
         setToolbar();
 
         Spinner spin = (Spinner) findViewById(R.id.spinbgroup);
@@ -49,30 +49,59 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
 
-        bdate = (EditText) findViewById(R.id.bdate);
-        bdate.setInputType(InputType.TYPE_NULL);
-        bdate.requestFocus();
+        et=(EditText) findViewById(R.id.etdatepicker1);
 
-        setDateTimeField();
-
-    }
-
-    private void setDateTimeField() {
-        bdate.setOnClickListener((View.OnClickListener)this);
-
-        Calendar newCalendar = Calendar.getInstance();
-        bDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                bdate.setText(dateFormatter.format(newDate.getTime()));
+        et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(DATE_PICKER_ID);
             }
+        });
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+/*
+  bdatepicker = (DatePicker) findViewById(R.id.bdatepicker);
+       // time = (TextView) findViewById(R.id);
+        calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DATE);
+        int mon = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        //showTime(hour, min);
 
+
+*/
     }
 
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_PICKER_ID:
+
+                // open datepicker dialog.
+                // set date picker for current date
+                // add pickerListener listner to date picker
+                return new DatePickerDialog(this, pickerListener, year, month,day);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener() {
+
+        // when dialog box is closed, below method will be called.
+        @Override
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+
+            year  = selectedYear;
+            month = selectedMonth;
+            day   = selectedDay;
+
+            // Show selected date
+            et.setText(new StringBuilder().append(month + 1)
+                    .append("-").append(day).append("-").append(year)
+                    .append(" "));
+
+        }
+    };
 
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -84,15 +113,9 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(v == bdate) {
-                        bDatePicker.show();
-                    }
-
                     finish();
                 }
             });
-
-
         }
     }
 
@@ -105,7 +128,6 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

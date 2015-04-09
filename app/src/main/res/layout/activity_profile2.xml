@@ -10,14 +10,13 @@
 
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content">
 
 
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
->
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -40,11 +39,12 @@
             android:hint="Niti Choksi"
             android:textColorHint="#000000"/>
 
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/etdatepicker"
-    android:textColorHint="#000000"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etdatepicker"
+            android:textColorHint="#000000"/>
+
 
 
 
@@ -67,15 +67,13 @@
 
 
 
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etdatepicker1"/>
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bdate"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -180,7 +178,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/btnUpdate"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="18dp"
             android:layout_gravity="center"
             android:text="Update Profile"
             android:textSize="24sp"
@@ -195,7 +193,7 @@
 
 
 </LinearLayout>
-
+</ScrollView>
 </LinearLayout>
 
 
