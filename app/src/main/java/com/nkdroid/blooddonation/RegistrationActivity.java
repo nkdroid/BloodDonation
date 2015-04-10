@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 
 public class RegistrationActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
-    String[] bgrp= {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
+
+    String[] city= {"Vadodara"};
+    String[] area= {"Karelibaugh","Vaghodia","Subhanpura","O.P Road","Nyaymandir","Alkapuri"};
+
     private Toolbar toolbar;
     private EditText name,cntct,email,cityname,areacode;
     private TextView btnContinue;
@@ -25,12 +28,19 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
         setContentView(R.layout.activity_registration);
         setToolbar();
 
-        Spinner spin = (Spinner) findViewById(R.id.spbg);
-        spin.setOnItemSelectedListener(this);
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item,bgrp);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aa);
 
+
+        Spinner spcity = (Spinner) findViewById(R.id.spcity);
+        spcity.setOnItemSelectedListener(this);
+        ArrayAdapter acity = new ArrayAdapter(this, android.R.layout.simple_spinner_item,city);
+        acity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spcity.setAdapter(acity);
+
+        Spinner sparea = (Spinner) findViewById(R.id.sparea);
+        sparea.setOnItemSelectedListener(this);
+        ArrayAdapter aarea = new ArrayAdapter(this, android.R.layout.simple_spinner_item,area);
+        aarea.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sparea.setAdapter(aarea);
         initView();
     }
 
@@ -38,7 +48,7 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
 
     private void initView() {
         name= (EditText) findViewById(R.id.fname);
-       cntct= (EditText) findViewById(R.id.contact);
+        cntct= (EditText) findViewById(R.id.contact);
         email= (EditText) findViewById(R.id.email);
         cityname= (EditText) findViewById(R.id.area);
         areacode= (EditText) findViewById(R.id.areacode);
@@ -49,7 +59,7 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
             public void onClick(View v) {
                 if (isEmptyField(name)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
-                } else if (isEmptyField(cntct)) {
+                }/* else if (isEmptyField(cntct)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Contact", Toast.LENGTH_LONG).show();
                 }
                 else if (isEmptyField(email)) {
@@ -60,7 +70,7 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
                 }
                 else if (isEmptyField(areacode)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Area Code", Toast.LENGTH_LONG).show();
-                }
+                }*/
                     else {
 
                     //store in shared preference
@@ -68,6 +78,9 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
                     //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
 
                    // startActivity(intent);
+                    Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity2.class);
+
+                    startActivity(intent);
                     finish();
 
                 }
@@ -89,7 +102,7 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
-            toolbar.setTitle("REGISTER");
+            toolbar.setTitle("Register");
             setSupportActionBar(toolbar);
         }
     }

@@ -21,4 +21,5 @@
     <string name="title_activity_fragment_one">FragmentOne</string>
     <string name="title_activity_fragment_two">FragmentTwo</string>
     <string name="title_activity_pager_sliding_tab_strip">PagerSlidingTabStrip</string>
+    <string name="title_activity_registration_activity2">RegistrationActivity2</string>
 </resources>

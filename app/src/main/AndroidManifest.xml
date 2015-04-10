@@ -101,6 +101,10 @@
             android:name=".PagerSlidingTabStrip"
             android:label="@string/title_activity_pager_sliding_tab_strip" >
         </activity>
+        <activity
+            android:name=".RegistrationActivity2"
+            android:label="@string/title_activity_registration_activity2" >
+        </activity>
     </application>
 
 </manifest>
