@@ -4,5 +4,4 @@
     tools:context="com.nkdroid.blooddonation.ProfileActivity">
 
     <include layout="@layout/app_bar"/>
-
 </RelativeLayout>

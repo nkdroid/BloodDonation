@@ -10,7 +10,8 @@
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,7 +22,47 @@
         <Spinner
             android:id="@+id/spbg"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/background_tab_pink"
             android:layout_height="wrap_content"></Spinner>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textSize="@dimen/textsize"
+            android:textColor="@color/textcolor"
+            android:text="Upload Blood Group Proof:"/>
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_none_profile"
+            android:layout_above="@+id/txtButton"
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:text="Upload"
+            android:padding="18dp"
+            android:gravity="center"
+            android:textSize="@dimen/textsize"
+            android:background="#3F51B5"
+            android:textColor="@color/btntextcolor"
+            android:id="@+id/txtButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
 </LinearLayout>

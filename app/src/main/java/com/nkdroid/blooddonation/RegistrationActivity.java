@@ -1,17 +1,24 @@
 package com.nkdroid.blooddonation;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 
 public class RegistrationActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
@@ -20,8 +27,13 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
     String[] area= {"Karelibaugh","Vaghodia","Subhanpura","O.P Road","Nyaymandir","Alkapuri"};
 
     private Toolbar toolbar;
-    private EditText name,cntct,email,cityname,areacode;
+    private EditText name,cntct,email,cityname,areacode,bdate;
     private TextView btnContinue;
+
+    private DatePickerDialog fromDatePickerDialog;
+
+    private SimpleDateFormat dateFormatter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +53,11 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
         ArrayAdapter aarea = new ArrayAdapter(this, android.R.layout.simple_spinner_item,area);
         aarea.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sparea.setAdapter(aarea);
+
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
         initView();
+
     }
 
 
@@ -53,6 +69,15 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
         cityname= (EditText) findViewById(R.id.area);
         areacode= (EditText) findViewById(R.id.areacode);
         btnContinue= (TextView)findViewById(R.id.btncont);
+        bdate = (EditText) findViewById(R.id.bdate);
+        bdate.setInputType(InputType.TYPE_NULL);
+        bdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDateTimeField();
+                fromDatePickerDialog.show();
+            }
+        });
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +95,13 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
                 }
                 else if (isEmptyField(areacode)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Area Code", Toast.LENGTH_LONG).show();
-                }*/
-                    else {
+                }*/ else {
 
                     //store in shared preference
-                   // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
+                    // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
                     //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
 
-                   // startActivity(intent);
+                    // startActivity(intent);
                     Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity2.class);
 
                     startActivity(intent);
@@ -87,6 +111,22 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
 
             }
         });
+
+    }
+
+    private void setDateTimeField() {
+
+        Calendar newCalendar = Calendar.getInstance();
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                bdate.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
 
     }
 

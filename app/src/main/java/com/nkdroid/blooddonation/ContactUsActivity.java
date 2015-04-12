@@ -1,5 +1,19 @@
 package com.nkdroid.blooddonation;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.os.Bundle;
+import android.text.InputType;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +31,6 @@ public class ContactUsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_contact_us);
 
         setToolbar();
-
     }
 
     private void setToolbar() {
@@ -35,5 +48,4 @@ public class ContactUsActivity extends ActionBarActivity {
             });
         }
     }
-
 }

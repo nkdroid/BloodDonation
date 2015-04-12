@@ -18,7 +18,7 @@ public class MapsActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+       setContentView(R.layout.activity_maps);
         // Get a handle to the Map Fragment
         GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         LatLng india = new LatLng(22.3000, 73.2003);
