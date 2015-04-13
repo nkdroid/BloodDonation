@@ -90,10 +90,15 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         txtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!isProfilePicAdded) {
+                    Toast.makeText(RegistrationActivity2.this, "Please Upload Proof", Toast.LENGTH_LONG).show();
+                } else {
                     progressDialog = new ProgressDialog(RegistrationActivity2.this);
                     progressDialog.setMessage("Uploading...");
                     progressDialog.show();
                     t = postImage();
+                }
             }
 
         });
