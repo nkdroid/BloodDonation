@@ -47,7 +47,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
     private TextView txtButton;
     private ImageView imageView;
     private int chooserType;
-    private String filePath;
+    private String filePath,sblood;
     private String imageFilePath;
     private boolean isProfilePicAdded = false;
     private ImageChooserManager imageChooserManager;
@@ -73,7 +73,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         bgrp.add("O-");
 
 
-        Spinner spbloodgroup = (Spinner) findViewById(R.id.spbg);
+        final Spinner spbloodgroup = (Spinner) findViewById(R.id.spbg);
         spbloodgroup.setOnItemSelectedListener(this);
         TimeSpinnerAdapter tsp=new TimeSpinnerAdapter(RegistrationActivity2.this,bgrp);
         spbloodgroup.setAdapter(tsp);
@@ -113,6 +113,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                     Toast.makeText(RegistrationActivity2.this, "Please Upload Proof", Toast.LENGTH_LONG).show();
                 }
                 else {
+                    sblood=spbloodgroup.getSelectedItem().toString();
 
                     //store in shared preference
                     // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
@@ -120,7 +121,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
 
                     // startActivity(intent);
                     Intent intent = new Intent(RegistrationActivity2.this,RegistrationActivity3.class);
-
+                    intent.putExtra("BloodGrp", sblood);
                     startActivity(intent);
 
                 }

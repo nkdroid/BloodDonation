@@ -17,6 +17,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -34,12 +36,17 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
     ArrayList<String> city=new ArrayList<>();
     ArrayList<String> area=new ArrayList<>();
     private Toolbar toolbar;
-    private EditText name,bdate,address,weight,contact,email;
+    private EditText name,bdate,address,weight,contact,email,password,cpass;
+    private Spinner ecity,earea;
+    private String sname,sbdate,sgender,saddress,sweight,scontact,semai,scity,sarea,spasswd,cspass,NAME;
     private TextView btnContinue;
-
+    private  RadioGroup rg;
     private DatePickerDialog fromDatePickerDialog;
 
     private SimpleDateFormat dateFormatter;
+
+    public RegistrationActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +70,25 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
         TimeSpinnerAdapter tspcity=new TimeSpinnerAdapter(RegistrationActivity.this,city);
         spcity.setAdapter(tspcity);
 
-        Spinner sparea = (Spinner) findViewById(R.id.sparea);
+        final Spinner sparea = (Spinner) findViewById(R.id.sparea);
         sparea.setOnItemSelectedListener(this);
         TimeSpinnerAdapter tsparea=new TimeSpinnerAdapter(RegistrationActivity.this,area);
         sparea.setAdapter(tsparea);
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-        initView();
-
-    }
-
-
-
-    private void initView() {
+        rg = (RadioGroup) findViewById(R.id.gendergroup);
         name= (EditText) findViewById(R.id.fname);
         address=(EditText)findViewById(R.id.address);
         contact= (EditText) findViewById(R.id.contact);
         email= (EditText) findViewById(R.id.email);
         weight= (EditText) findViewById(R.id.weight);
+        password= (EditText) findViewById(R.id.password);
+        cpass= (EditText) findViewById(R.id.cpassword);
+
+        earea= (Spinner) findViewById(R.id.sparea);
+        ecity= (Spinner) findViewById(R.id.spcity);
+
         btnContinue= (TextView)findViewById(R.id.btncont);
         bdate = (EditText) findViewById(R.id.bdate);
         bdate.setInputType(InputType.TYPE_NULL);
@@ -90,6 +97,7 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
             public void onClick(View v) {
                 setDateTimeField();
                 fromDatePickerDialog.show();
+
             }
         });
 
@@ -98,39 +106,64 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
             public void onClick(View v) {
                 if (isEmptyField(name)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
-                }else if (isEmptyField(bdate)) {
+                } else if (isEmptyField(bdate)) {
                     Toast.makeText(RegistrationActivity.this, "Please Select Birthdate", Toast.LENGTH_LONG).show();
-                }else if (isEmptyField(address)) {
+                } else if (isEmptyField(address)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Address", Toast.LENGTH_LONG).show();
-                }
-                else if (isEmptyField(weight)) {
+                } else if (isEmptyField(weight)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Weight", Toast.LENGTH_LONG).show();
-                }
-                else if (isEmptyField(contact)) {
+                } else if (isEmptyField(contact)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Contact", Toast.LENGTH_LONG).show();
+                } else if (isEmptyField(email)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter E-Mail", Toast.LENGTH_LONG).show();
+                } else if (isEmptyField(password)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
+                } else if (isEmptyField(cpass)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Confirm Password", Toast.LENGTH_LONG).show();
                 }
-                else if (isEmptyField(email)) {
-                        Toast.makeText(RegistrationActivity.this, "Please Enter E-Mail", Toast.LENGTH_LONG).show();
-                }
+                else {
 
-                 else {
-
+                    sname = name.getText().toString();
+                    sbdate=bdate.getText().toString();
+                    sgender = ((RadioButton)findViewById(rg.getCheckedRadioButtonId() )).getText().toString();
+                    saddress=address.getText().toString();
+                    sweight=weight.getText().toString();
+                    scontact=contact.getText().toString();
+                    semai=email.getText().toString();
+                    scontact=contact.getText().toString();
+                    sarea=earea.getSelectedItem().toString();
+                    scity=ecity.getSelectedItem().toString();
+                    spasswd=password.getText().toString();
+                    cspass=cpass.getText().toString();
+                    if (spasswd!=cspass) {
+                        Toast.makeText(RegistrationActivity.this, "Password doesn't match ", Toast.LENGTH_LONG).show();
+                    }
                     //store in shared preference
                     // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
                     //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
-
-                    // startActivity(intent);
                     Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity2.class);
+
+                    intent.putExtra("NAME",sname);
+                    intent.putExtra("BDATE",sbdate);
+                    intent.putExtra("GENDER",sgender);
+                    intent.putExtra("ADDRESS",saddress);
+                    intent.putExtra("CITY",scity);
+                    intent.putExtra("AREA",sarea);
+                    intent.putExtra("WEIGHT",sweight);
+                    intent.putExtra("CONTACT",scontact);
+                    intent.putExtra("EMAIL",semai);
+                    intent.putExtra("PASSWD",spasswd);
+                    // startActivity(intent);
 
                     startActivity(intent);
                     finish();
-
                 }
-
             }
         });
 
     }
+
+
 
     private void setDateTimeField() {
 
@@ -183,7 +216,6 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
 
     }
 
-
     public class TimeSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
 
         private final Context activity;
@@ -219,8 +251,6 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
             txt.setText(asr.get(position));
             txt.setTextColor(Color.parseColor("#494949"));
             return  txt;
-
-
 
         }
 
