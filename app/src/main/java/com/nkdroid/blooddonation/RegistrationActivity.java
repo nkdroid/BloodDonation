@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
+
 public class RegistrationActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     ArrayList<String> city=new ArrayList<>();

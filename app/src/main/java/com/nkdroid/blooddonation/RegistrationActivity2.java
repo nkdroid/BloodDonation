@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -51,6 +53,8 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
     private ImageChooserManager imageChooserManager;
     private ProgressDialog progressDialog;
     private Toolbar toolbar;
+    private TextView btncontinue;
+    private int f=0,t=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +90,43 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         txtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(RegistrationActivity2.this);
-                progressDialog.setMessage("Uploading...");
-                progressDialog.show();
-                postImage();
+                    progressDialog = new ProgressDialog(RegistrationActivity2.this);
+                    progressDialog.setMessage("Uploading...");
+                    progressDialog.show();
+                    t = postImage();
+            }
+
+        });
+
+
+        btncontinue=(TextView)findViewById(R.id.btncontinue1);
+
+        btncontinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (t==0) {
+                    Toast.makeText(RegistrationActivity2.this, "Please Upload Proof", Toast.LENGTH_LONG).show();
+                }
+                else {
+
+                    //store in shared preference
+                    // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
+                    //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
+
+                    // startActivity(intent);
+                    Intent intent = new Intent(RegistrationActivity2.this,RegistrationActivity3.class);
+
+                    startActivity(intent);
+
+                }
+
             }
         });
 
     }
+
+
+
 
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -240,7 +273,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
     }
 
 
-    public void postImage() {
+    public int postImage() {
 
 
         new AsyncTask<Void,Void,Void>(){
@@ -253,7 +286,9 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                 return null;
             }
         } .execute();
+        t=1;
 
+        return t;
     }
 
     public void uploadFile(File fileName){

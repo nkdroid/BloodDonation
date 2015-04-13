@@ -62,16 +62,15 @@
             android:id="@+id/txtButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </LinearLayout>
+
         <TextView
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
 
-            android:layout_marginTop="70dp"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
-            android:id="@+id/btncont"
-            android:text="Register"
+            android:id="@+id/btncontinue1"
+            android:text="Continue"
             android:textSize="@dimen/textsize"
             android:textColor="@color/btntextcolor"
             android:gravity="center"
@@ -80,6 +79,5 @@
             android:padding="16dp"
             android:background="@drawable/background_tab_pink"/>
 
-
-
+    </LinearLayout>
 </LinearLayout>

@@ -105,6 +105,10 @@
             android:name=".RegistrationActivity2"
             android:label="@string/title_activity_registration_activity2" >
         </activity>
+        <activity
+            android:name=".RegistrationActivity3"
+            android:label="@string/title_activity_registration_activity3" >
+        </activity>
     </application>
 
 </manifest>

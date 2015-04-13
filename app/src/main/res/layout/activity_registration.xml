@@ -176,6 +176,26 @@
                 android:textColor="@color/textcolor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/password"
+                android:hint="Password"
+                android:singleLine="true"
+                android:textColorHint="@color/textHintcolor"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/textcolor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"/>
+            <EditText
+                android:id="@+id/cpassword"
+                android:hint="Confirm Password"
+                android:singleLine="true"
+                android:textColorHint="@color/textHintcolor"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/textcolor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"/>
 
             <TextView
                 android:layout_gravity="center"
