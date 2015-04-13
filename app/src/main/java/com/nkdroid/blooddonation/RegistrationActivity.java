@@ -1,33 +1,39 @@
 package com.nkdroid.blooddonation;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 
 public class RegistrationActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
-    String[] city= {"Vadodara"};
-    String[] area= {"Karelibaugh","Vaghodia","Subhanpura","O.P Road","Nyaymandir","Alkapuri"};
-
+    ArrayList<String> city=new ArrayList<>();
+    ArrayList<String> area=new ArrayList<>();
     private Toolbar toolbar;
-    private EditText name,cntct,email,cityname,areacode,bdate;
+    private EditText name,bdate,address,weight,contact,email;
     private TextView btnContinue;
 
     private DatePickerDialog fromDatePickerDialog;
@@ -40,19 +46,26 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
         setContentView(R.layout.activity_registration);
         setToolbar();
 
+        city.add("Vadodara");
+
+        area.add("Karelibaugh");
+        area.add("Vaghodia");
+        area.add("Subhanpura");
+        area.add("Alkapuri");
+        area.add("O.P Road");
+        area.add("Nyaymandir");
+
 
 
         Spinner spcity = (Spinner) findViewById(R.id.spcity);
         spcity.setOnItemSelectedListener(this);
-        ArrayAdapter acity = new ArrayAdapter(this, android.R.layout.simple_spinner_item,city);
-        acity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spcity.setAdapter(acity);
+        TimeSpinnerAdapter tspcity=new TimeSpinnerAdapter(RegistrationActivity.this,city);
+        spcity.setAdapter(tspcity);
 
         Spinner sparea = (Spinner) findViewById(R.id.sparea);
         sparea.setOnItemSelectedListener(this);
-        ArrayAdapter aarea = new ArrayAdapter(this, android.R.layout.simple_spinner_item,area);
-        aarea.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sparea.setAdapter(aarea);
+        TimeSpinnerAdapter tsparea=new TimeSpinnerAdapter(RegistrationActivity.this,area);
+        sparea.setAdapter(tsparea);
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
@@ -64,10 +77,10 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
 
     private void initView() {
         name= (EditText) findViewById(R.id.fname);
-        cntct= (EditText) findViewById(R.id.contact);
+        address=(EditText)findViewById(R.id.address);
+        contact= (EditText) findViewById(R.id.contact);
         email= (EditText) findViewById(R.id.email);
-        cityname= (EditText) findViewById(R.id.area);
-        areacode= (EditText) findViewById(R.id.areacode);
+        weight= (EditText) findViewById(R.id.weight);
         btnContinue= (TextView)findViewById(R.id.btncont);
         bdate = (EditText) findViewById(R.id.bdate);
         bdate.setInputType(InputType.TYPE_NULL);
@@ -84,18 +97,22 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
             public void onClick(View v) {
                 if (isEmptyField(name)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
-                }/* else if (isEmptyField(cntct)) {
+                }else if (isEmptyField(bdate)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Select Birthdate", Toast.LENGTH_LONG).show();
+                }else if (isEmptyField(address)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Address", Toast.LENGTH_LONG).show();
+                }
+                else if (isEmptyField(weight)) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Weight", Toast.LENGTH_LONG).show();
+                }
+                else if (isEmptyField(contact)) {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Contact", Toast.LENGTH_LONG).show();
                 }
                 else if (isEmptyField(email)) {
-                        Toast.makeText(RegistrationActivity.this, "Please Enter EMail", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrationActivity.this, "Please Enter E-Mail", Toast.LENGTH_LONG).show();
                 }
-                else if (isEmptyField(cityname)) {
-                    Toast.makeText(RegistrationActivity.this, "Please Enter City Name", Toast.LENGTH_LONG).show();
-                }
-                else if (isEmptyField(areacode)) {
-                    Toast.makeText(RegistrationActivity.this, "Please Enter Area Code", Toast.LENGTH_LONG).show();
-                }*/ else {
+
+                 else {
 
                     //store in shared preference
                     // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
@@ -163,5 +180,58 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+
+    public class TimeSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
+
+        private final Context activity;
+        private ArrayList<String> asr;
+
+        public TimeSpinnerAdapter(Context context,ArrayList<String> asr) {
+            this.asr=asr;
+            activity = context;
+        }
+
+        public int getCount()
+        {
+            return asr.size();
+        }
+
+        public Object getItem(int i)
+        {
+            return asr.get(i);
+        }
+
+        public long getItemId(int i)
+        {
+            return (long)i;
+        }
+
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            TextView txt = new TextView(RegistrationActivity.this);
+            txt.setPadding(16,16,16,16);
+            txt.setTextSize(16);
+            txt.setGravity(Gravity.CENTER_VERTICAL);
+            txt.setText(asr.get(position));
+            txt.setTextColor(Color.parseColor("#494949"));
+            return  txt;
+
+
+
+        }
+
+        public View getView(int i, View view, ViewGroup viewgroup) {
+            TextView txt = new TextView(RegistrationActivity.this);
+            txt.setGravity(Gravity.CENTER_VERTICAL);
+            txt.setPadding(16,16,16,16);
+            txt.setTextSize(16);
+            txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_spinner, 0);
+            txt.setText(asr.get(i));
+            txt.setTextColor(Color.parseColor("#ffffff"));
+            return  txt;
+        }
     }
 }

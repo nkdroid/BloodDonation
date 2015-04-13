@@ -365,8 +365,8 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         public View getView(int i, View view, ViewGroup viewgroup) {
             TextView txt = new TextView(RegistrationActivity2.this);
             txt.setGravity(Gravity.CENTER_VERTICAL);
-            txt.setPadding(8,8,8,8);
-            txt.setTextSize(15);
+            txt.setPadding(16,16,16,16);
+            txt.setTextSize(16);
             txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_spinner, 0);
             txt.setText(asr.get(i));
             txt.setTextColor(Color.parseColor("#ffffff"));

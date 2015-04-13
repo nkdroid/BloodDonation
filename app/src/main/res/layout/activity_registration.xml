@@ -110,7 +110,8 @@
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -121,13 +122,16 @@
                 <Spinner
                     android:id="@+id/spcity"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/background_tab_pink"
                     android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
             <LinearLayout
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -138,6 +142,8 @@
                 <Spinner
                     android:id="@+id/sparea"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/background_tab_pink"
                     android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
 
