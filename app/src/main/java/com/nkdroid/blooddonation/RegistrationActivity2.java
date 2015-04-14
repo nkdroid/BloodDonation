@@ -55,6 +55,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
     private Toolbar toolbar;
     private TextView btncontinue;
     private int f=0,t=0;
+    private String name,dob,gender,weight,contact,email,address,city,area,passwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,11 +119,34 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                     //store in shared preference
                     // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
                     //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
+                    Intent intnt = new Intent(RegistrationActivity2.this,RegistrationActivity3.class);
+
+                    name = intnt.getExtras().getString("NAME");
+                    dob = intnt.getExtras().getString("BDATE");
+                    gender = intnt.getExtras().getString("GENDER");
+                    weight = intnt.getExtras().getString("WEIGHT");
+                    contact = intnt.getExtras().getString("CONTACT");
+                    email = intnt.getExtras().getString("EMAIL");
+                    address = intnt.getExtras().getString("ADDRESS");
+                    city = intnt.getExtras().getString("CITY");
+                    area = intnt.getExtras().getString("AREA");
+                    passwd = intnt.getExtras().getString("PASSWD");
+
+                    intnt.putExtra("NAME1",name);
+                    intnt.putExtra("BDATE1",dob);
+                    intnt.putExtra("GENDER1",gender);
+                    intnt.putExtra("ADDRESS1",address);
+                    intnt.putExtra("CITY1",city);
+                    intnt.putExtra("AREA1",area);
+                    intnt.putExtra("WEIGHT1",weight);
+                    intnt.putExtra("CONTACT1",contact);
+                    intnt.putExtra("EMAIL1",email);
+                    intnt.putExtra("PASSWD1",passwd);
+
 
                     // startActivity(intent);
-                    Intent intent = new Intent(RegistrationActivity2.this,RegistrationActivity3.class);
-                    intent.putExtra("BloodGrp", sblood);
-                    startActivity(intent);
+                    intnt.putExtra("BloodGrp", sblood);
+                    startActivity(intnt);
 
                 }
 
