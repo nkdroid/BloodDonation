@@ -154,7 +154,6 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
                     intent.putExtra("EMAIL",semai);
                     intent.putExtra("PASSWD",spasswd);
                     // startActivity(intent);
-
                     startActivity(intent);
                     finish();
                 }
