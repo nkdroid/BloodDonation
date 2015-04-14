@@ -20,10 +20,10 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class RegistrationActivity3 extends ActionBarActivity {
     TextView Reg;
-    String resp;
     private String name,dob,gender,weight,contact,email,address,city,area,passwd,bgrp;
     private Toolbar toolbar;
-private ProgressDialog dialog;
+    private ProgressDialog dialog;
+    int resp;
 
     public static final String SOAP_ACTION = "http://tempuri.org/AddUser";
     public static  final String OPERATION_NAME = "AddUser";
@@ -31,7 +31,7 @@ private ProgressDialog dialog;
     public static  final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";
 
     //public  final String SOAP_ADDRESS = "http://artist.somee.com/DPR.asmx";
-    public static  final String SOAP_ADDRESS = " http://donateblood.somee.com/WebService.asmx";
+    public static  final String SOAP_ADDRESS = "http://donateblood.somee.com/WebService.asmx";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ private ProgressDialog dialog;
         });
     }
 
-    public String Call(String c1, String c2, String c3, String c4, String c5, String c6, String c7, String c8, String c9, String c10, String c11)
+    public int Call(String c1, String c2, String c3, String c4, String c5, String c6, String c7, String c8, String c9, String c10, String c11)
     {
         SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
         PropertyInfo p1=new PropertyInfo();
@@ -178,11 +178,8 @@ private ProgressDialog dialog;
             //displayExceptionMessage(ex.getMessage());
             //System.out.println(exception.getMessage());
         }
-        return response.toString() ;
+        return Integer.parseInt(response.toString());
     }
-
-
-
 
     private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);

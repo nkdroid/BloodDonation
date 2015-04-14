@@ -91,7 +91,6 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         txtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (!isProfilePicAdded) {
                     Toast.makeText(RegistrationActivity2.this, "Please Upload Proof", Toast.LENGTH_LONG).show();
                 } else {
@@ -103,7 +102,6 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
             }
 
         });
-
 
         btncontinue=(TextView)findViewById(R.id.btncontinue1);
 
@@ -142,7 +140,6 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                     intnt.putExtra("CONTACT1",contact);
                     intnt.putExtra("EMAIL1",email);
                     intnt.putExtra("PASSWD1",passwd);
-
 
                     // startActivity(intent);
                     intnt.putExtra("BloodGrp", sblood);
@@ -368,8 +365,6 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
             System.out.println(" completed ...");
             progressDialog.dismiss();
             Toast.makeText(getApplication(), " completed ...", Toast.LENGTH_LONG).show();
-
-
 
         }
 

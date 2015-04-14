@@ -162,8 +162,6 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
 
     }
 
-
-
     private void setDateTimeField() {
 
         Calendar newCalendar = Calendar.getInstance();
