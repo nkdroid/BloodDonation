@@ -119,30 +119,30 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                     //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
                     Intent intnt = new Intent(RegistrationActivity2.this,RegistrationActivity3.class);
 
-                    name = intnt.getExtras().getString("NAME");
-                    dob = intnt.getExtras().getString("BDATE");
-                    gender = intnt.getExtras().getString("GENDER");
-                    weight = intnt.getExtras().getString("WEIGHT");
-                    contact = intnt.getExtras().getString("CONTACT");
-                    email = intnt.getExtras().getString("EMAIL");
-                    address = intnt.getExtras().getString("ADDRESS");
-                    city = intnt.getExtras().getString("CITY");
-                    area = intnt.getExtras().getString("AREA");
-                    passwd = intnt.getExtras().getString("PASSWD");
-
-                    intnt.putExtra("NAME1",name);
-                    intnt.putExtra("BDATE1",dob);
-                    intnt.putExtra("GENDER1",gender);
-                    intnt.putExtra("ADDRESS1",address);
-                    intnt.putExtra("CITY1",city);
-                    intnt.putExtra("AREA1",area);
-                    intnt.putExtra("WEIGHT1",weight);
-                    intnt.putExtra("CONTACT1",contact);
-                    intnt.putExtra("EMAIL1",email);
-                    intnt.putExtra("PASSWD1",passwd);
-
-                    // startActivity(intent);
-                    intnt.putExtra("BloodGrp", sblood);
+//                    name = intnt.getExtras().getString("NAME");
+//                    dob = intnt.getExtras().getString("BDATE");
+//                    gender = intnt.getExtras().getString("GENDER");
+//                    weight = intnt.getExtras().getString("WEIGHT");
+//                    contact = intnt.getExtras().getString("CONTACT");
+//                    email = intnt.getExtras().getString("EMAIL");
+//                    address = intnt.getExtras().getString("ADDRESS");
+//                    city = intnt.getExtras().getString("CITY");
+//                    area = intnt.getExtras().getString("AREA");
+//                    passwd = intnt.getExtras().getString("PASSWD");
+//
+//                    intnt.putExtra("NAME1",name);
+//                    intnt.putExtra("BDATE1",dob);
+//                    intnt.putExtra("GENDER1",gender);
+//                    intnt.putExtra("ADDRESS1",address);
+//                    intnt.putExtra("CITY1",city);
+//                    intnt.putExtra("AREA1",area);
+//                    intnt.putExtra("WEIGHT1",weight);
+//                    intnt.putExtra("CONTACT1",contact);
+//                    intnt.putExtra("EMAIL1",email);
+//                    intnt.putExtra("PASSWD1",passwd);
+//
+//                    // startActivity(intent);
+//                    intnt.putExtra("BloodGrp", sblood);
                     startActivity(intnt);
 
                 }
@@ -314,8 +314,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
             }
         } .execute();
         t=1;
-
-        return t;
+    return t;
     }
 
     public void uploadFile(File fileName){
@@ -324,10 +323,10 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         FTPClient client = new FTPClient();
 
         try {
-            client.connect("198.37.116.29",21);
+            client.connect("198.37.116.26",21);
             client.login("donateblood", "Donateblood1");
             client.setType(FTPClient.TYPE_AUTO);
-            client.changeDirectory("/www.DEMOweb5.somee.com/images/");
+            client.changeDirectory("/www.donateblood.somee.com/images/");
 
             client.upload(fileName, new MyTransferListener());
             Log.e("filename",fileName+"");

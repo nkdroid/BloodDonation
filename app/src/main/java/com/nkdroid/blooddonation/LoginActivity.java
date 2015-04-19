@@ -53,6 +53,14 @@ import org.ksoap2.transport.HttpTransportSE;
         etUsername= (EditText) findViewById(R.id.etUsername);
         etPassword= (EditText) findViewById(R.id.etPassword);
         btnLogin= (TextView) findViewById(R.id.btnLogin);
+        btnNewRegistration=(TextView)findViewById(R.id.btnNewRegistration);
+        btnNewRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,9 +71,6 @@ import org.ksoap2.transport.HttpTransportSE;
                 } else {
                     uname = etUsername.getText().toString();
                     passwd = etPassword.getText().toString();
-                    User user = PrefUtils.getLoggedIn(LoginActivity.this);
-                    PrefUtils.setLoggedIn(LoginActivity.this, true, user.getUsername(), user.getPassword());
-                    Log.e("username", user.getUsername() + "");
                     // if( user.getUsername().equals(etUsername.getText().toString().trim()) && user.getPassword().equals(etPassword.getText().toString().trim())){
 
                     new AsyncTask<Void, Void, Void>() {
@@ -86,18 +91,26 @@ import org.ksoap2.transport.HttpTransportSE;
                         @Override
                         protected void onPostExecute(Void aVoid) {
                             super.onPostExecute(aVoid);
+                            Log.e("Response",resp+"");
                             dialog.dismiss();
+                            if(resp==1)
+                            {
+                                User user = PrefUtils.getLoggedIn(LoginActivity.this);
+                                PrefUtils.setLoggedIn(LoginActivity.this, true, user.getUsername(), user.getPassword());
+                                Log.e("username", user.getUsername() + "");
+
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(), "Authentication Error"+resp, Toast.LENGTH_LONG).show();
+                            }
                         }
                     }.execute();
 
-                   if(resp==1)
-                   {Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else{
-                       Toast.makeText(getApplicationContext(), "Authentication Error", Toast.LENGTH_LONG).show();
-                   }
+
                 }
             }
         });
