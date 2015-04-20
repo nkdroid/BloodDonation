@@ -21,6 +21,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.nkdroid.blooddonation.model.ComplexPreferences;
+import com.nkdroid.blooddonation.model.UserClass;
+
 
 public class PrefUtils  {
 
@@ -48,6 +51,19 @@ public class PrefUtils  {
     public static void clearLogin(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         sp.edit().putBoolean("isLogin", false).commit();
+    }
+
+    public static void setCurrentUser(UserClass currentUser, Context ctx){
+
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(ctx, "user_prefs", 0);
+        complexPreferences.putObject("current_user_value", currentUser);
+        complexPreferences.commit();
+    }
+
+    public static UserClass getCurrentUser(Context ctx){
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(ctx, "user_prefs", 0);
+        UserClass currentUser = complexPreferences.getObject("current_user_value", UserClass.class);
+        return currentUser;
     }
 
 

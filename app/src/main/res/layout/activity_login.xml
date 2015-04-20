@@ -20,6 +20,7 @@
 
 
     <LinearLayout
+        android:padding="16dp"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -27,6 +28,7 @@
 
 
         <EditText
+
             android:id="@+id/etUsername"
             android:hint="Username"
             android:singleLine="true"

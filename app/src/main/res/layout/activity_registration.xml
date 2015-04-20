@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+
     android:background="@drawable/background"
     tools:context="com.nkdroid.registrationlogin.RegistrationActivity">
     <include layout="@layout/app_bar"/>
 
     <ScrollView
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -32,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -69,35 +72,31 @@
                     android:textColor="@color/textcolor"
                     android:text="Gender"/>
 
-
-                <LinearLayout
-                    android:layout_centerInParent="true"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
                 <RadioGroup
-                    android:id="@+id/gendergroup"
                     android:orientation="horizontal"
+                    android:id="@+id/gendergroup"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" >
 
                     <RadioButton
+                        android:id="@+id/radioMale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Male"
-                        android:textSize="@dimen/textsize"
-                        android:textColor="@color/textcolor"/>
+                        android:checked="true" />
+
                     <RadioButton
+                        android:id="@+id/radioFemale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Female"
-                        android:textSize="@dimen/textsize"
-                        android:textColor="@color/textcolor"
-                        />
+                        android:text="FeMale" />
+
                 </RadioGroup>
-                </LinearLayout>
+
+
             </LinearLayout>
             <EditText
+                android:layout_marginTop="8dp"
                 android:id="@+id/address"
                 android:hint="Address"
                 android:singleLine="false"
@@ -107,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
+
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -121,12 +121,13 @@
                     android:text="City"/>
                 <Spinner
                     android:id="@+id/spcity"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_marginLeft="16dp"
                     android:background="@drawable/background_tab_pink"
                     android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
             <LinearLayout
+
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -141,13 +142,15 @@
                     android:text="Area"/>
                 <Spinner
                     android:id="@+id/sparea"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_marginLeft="16dp"
                     android:background="@drawable/background_tab_pink"
                     android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
 
             <EditText
+                android:inputType="number"
+                android:layout_marginTop="8dp"
                 android:id="@+id/weight"
                 android:hint="Weight"
                 android:singleLine="true"
@@ -158,8 +161,10 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:inputType="number"
+                android:layout_marginTop="8dp"
                 android:id="@+id/contact"
-                android:layout_marginTop="4dp"
+
                 android:hint="Contact Number"
                 android:singleLine="true"
                 android:textColorHint="@color/textHintcolor"
@@ -168,6 +173,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="8dp"
                 android:id="@+id/email"
                 android:hint="Email"
                 android:singleLine="true"
@@ -177,6 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
+                android:layout_marginTop="8dp"
                 android:id="@+id/password"
                 android:hint="Password"
                 android:singleLine="true"
@@ -187,6 +195,7 @@
                 android:layout_height="wrap_content"
                 android:password="true"/>
             <EditText
+                android:layout_marginTop="8dp"
                 android:id="@+id/cpassword"
                 android:hint="Confirm Password"
                 android:singleLine="true"
@@ -198,6 +207,7 @@
                 android:password="true"/>
 
             <TextView
+                android:layout_marginTop="8dp"
                 android:layout_gravity="center"
                 android:id="@+id/btncont"
                 android:text="Continue"
