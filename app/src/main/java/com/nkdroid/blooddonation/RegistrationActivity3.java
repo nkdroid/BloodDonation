@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -121,36 +122,55 @@ public class RegistrationActivity3 extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected void onPreExecute() {
-                        super.onPreExecute();
-                        dialog = new ProgressDialog(RegistrationActivity3.this);
-                        dialog.setMessage("Loading...");
-                        dialog.show();
-                    }
-
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        resp = Call(userClass.name,userClass.dob,userClass.gender,userClass.weight,userClass.contact,userClass.privacy,userClass.email,userClass.address,userClass.city,userClass.area,userClass.bgrp,userClass.password,userClass.donation_status,userClass.hiv,userClass.highbp,userClass.tb,userClass.heartd,userClass.amenia,userClass.req_status);
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void aVoid) {
-                        super.onPostExecute(aVoid);
-                        Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_LONG).show();
-                        dialog.dismiss();
-                        if(resp==1){
-                            PrefUtils.setCurrentUser(userClass,RegistrationActivity3.this);
-                            Intent intent = new Intent(RegistrationActivity3.this, HomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Error while inserting...try again", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }.execute();
+                Log.e("",userClass.name+"");
+                Log.e("",userClass.dob+"");
+                Log.e("",userClass.gender+"");
+                Log.e("",userClass.weight+"");
+                Log.e("",userClass.contact+"");
+                Log.e("",userClass.privacy+"");
+                Log.e("",userClass.email+"");
+                Log.e("",userClass.address+"");
+                Log.e("",userClass.city+"");
+                Log.e("",userClass.area+"");
+                Log.e("",userClass.bgrp+"");
+                Log.e("",userClass.password+"");
+                Log.e("",userClass.donation_status+"");
+                Log.e("",userClass.hiv+"");
+                Log.e("",userClass.highbp+"");
+                Log.e("",userClass.tb+"");
+                Log.e("",userClass.heartd+"");
+                Log.e("",userClass.amenia+"");
+                Log.e("",userClass.req_status+"");
+//                new AsyncTask<Void, Void, Void>() {
+//                    @Override
+//                    protected void onPreExecute() {
+//                        super.onPreExecute();
+//                        dialog = new ProgressDialog(RegistrationActivity3.this);
+//                        dialog.setMessage("Loading...");
+//                        dialog.show();
+//                    }
+//
+//                    @Override
+//                    protected Void doInBackground(Void... params) {
+//                        resp = Call(userClass.name,userClass.dob,userClass.gender,userClass.weight,userClass.contact,userClass.privacy,userClass.email,userClass.address,userClass.city,userClass.area,userClass.bgrp,userClass.password,userClass.donation_status,userClass.hiv,userClass.highbp,userClass.tb,userClass.heartd,userClass.amenia,userClass.req_status);
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    protected void onPostExecute(Void aVoid) {
+//                        super.onPostExecute(aVoid);
+//                        Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_LONG).show();
+//                        dialog.dismiss();
+//                        if(resp==1){
+//                            PrefUtils.setCurrentUser(userClass,RegistrationActivity3.this);
+//                            Intent intent = new Intent(RegistrationActivity3.this, HomeActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }else {
+//                            Toast.makeText(getApplicationContext(), "Error while inserting...try again", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//                }.execute();
 
             }
         });
