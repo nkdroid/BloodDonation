@@ -25,7 +25,7 @@
             android:text="Diseases"/>
 
         <CheckBox
-            android:id="@+id/heart"
+            android:id="@+id/heartd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Heart Disease"
@@ -33,14 +33,14 @@
             android:textColor="@color/textcolor"/>
 
         <CheckBox
-            android:id="@+id/diabetes"
+            android:id="@+id/tb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Diabetes"
+            android:text="TB"
             android:textSize="@dimen/textsize"
             android:textColor="@color/textcolor"/>
         <CheckBox
-            android:id="@+id/hbp"
+            android:id="@+id/highbp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="High Blood Pressure"

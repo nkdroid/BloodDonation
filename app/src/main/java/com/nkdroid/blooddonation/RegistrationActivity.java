@@ -440,6 +440,7 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
             setSupportActionBar(toolbar);
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

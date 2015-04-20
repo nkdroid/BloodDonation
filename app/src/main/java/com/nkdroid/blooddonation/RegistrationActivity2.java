@@ -36,6 +36,7 @@ import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
+import com.nkdroid.blooddonation.model.UserClass;
 
 import it.sauronsoftware.ftp4j.FTPClient;
 import it.sauronsoftware.ftp4j.FTPDataTransferListener;
@@ -55,6 +56,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
     private Toolbar toolbar;
     private TextView btncontinue;
     private int f=0,t=0;
+    private UserClass userClass;
     private String name,dob,gender,weight,contact,email,address,city,area,passwd;
 
     @Override
@@ -63,6 +65,9 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         setContentView(R.layout.activity_registration_activity2);
 
         setToolbar();
+        userClass=new UserClass();
+        userClass=PrefUtils.getCurrentUser(RegistrationActivity2.this);
+
 
         bgrp.add("A+");
         bgrp.add("A-");
@@ -112,39 +117,11 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                     Toast.makeText(RegistrationActivity2.this, "Please Upload Proof", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    sblood=spbloodgroup.getSelectedItem().toString();
 
-                    //store in shared preference
-                    // PrefUtils.setLoggedIn(RegistrationActivity.this, true, etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
-                    //Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
+                    userClass.bgrp= bgrp.get(spbloodgroup.getSelectedItemPosition());
+                    PrefUtils.setCurrentUser(userClass,RegistrationActivity2.this);
                     Intent intnt = new Intent(RegistrationActivity2.this,RegistrationActivity3.class);
-
-//                    name = intnt.getExtras().getString("NAME");
-//                    dob = intnt.getExtras().getString("BDATE");
-//                    gender = intnt.getExtras().getString("GENDER");
-//                    weight = intnt.getExtras().getString("WEIGHT");
-//                    contact = intnt.getExtras().getString("CONTACT");
-//                    email = intnt.getExtras().getString("EMAIL");
-//                    address = intnt.getExtras().getString("ADDRESS");
-//                    city = intnt.getExtras().getString("CITY");
-//                    area = intnt.getExtras().getString("AREA");
-//                    passwd = intnt.getExtras().getString("PASSWD");
-//
-//                    intnt.putExtra("NAME1",name);
-//                    intnt.putExtra("BDATE1",dob);
-//                    intnt.putExtra("GENDER1",gender);
-//                    intnt.putExtra("ADDRESS1",address);
-//                    intnt.putExtra("CITY1",city);
-//                    intnt.putExtra("AREA1",area);
-//                    intnt.putExtra("WEIGHT1",weight);
-//                    intnt.putExtra("CONTACT1",contact);
-//                    intnt.putExtra("EMAIL1",email);
-//                    intnt.putExtra("PASSWD1",passwd);
-//
-//                    // startActivity(intent);
-//                    intnt.putExtra("BloodGrp", sblood);
                     startActivity(intnt);
-
                 }
 
             }

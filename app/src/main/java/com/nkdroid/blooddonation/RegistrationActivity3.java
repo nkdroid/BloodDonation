@@ -9,8 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nkdroid.blooddonation.model.UserClass;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -20,11 +24,13 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class RegistrationActivity3 extends ActionBarActivity {
     TextView Reg;
-    private String name,dob,gender,weight,contact,email,address,city,area,passwd,bgrp;
+
     private Toolbar toolbar;
     private ProgressDialog dialog;
     int resp;
+    private CheckBox heartd,tb,highbp,anemia,hiv;
 
+    private UserClass userClass;
     public static final String SOAP_ACTION = "http://tempuri.org/AddUser";
     public static  final String OPERATION_NAME = "AddUser";
 
@@ -37,24 +43,84 @@ public class RegistrationActivity3 extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_activity3);
+        heartd= (CheckBox) findViewById(R.id.heartd);
+        tb= (CheckBox) findViewById(R.id.tb);
+        highbp= (CheckBox) findViewById(R.id.highbp);
+        anemia= (CheckBox) findViewById(R.id.anemia);
+        hiv= (CheckBox) findViewById(R.id.hiv);
+
         setToolbar();
         Reg=(TextView)findViewById(R.id.btnRegister);
+        userClass=new UserClass();
+        userClass=PrefUtils.getCurrentUser(RegistrationActivity3.this);
+        userClass.privacy="1";
+        userClass.donation_status="0";
+        userClass.req_status="0";
+        userClass.heartd="0";
+        userClass.tb="0";
+        userClass.highbp="0";
+        userClass.amenia="0";
+        userClass.hiv="0";
+        heartd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    userClass.heartd="1";
+                } else {
+                    userClass.heartd="0";
+                }
+            }
+        });
+
+        tb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    userClass.tb="1";
+                } else {
+                    userClass.tb="0";
+                }
+            }
+        });
+
+        highbp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    userClass.highbp="1";
+                } else {
+                    userClass.highbp="0";
+                }
+            }
+        });
+
+        anemia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    userClass.amenia="1";
+                } else {
+                    userClass.amenia="0";
+                }
+            }
+        });
+
+        hiv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    userClass.hiv="1";
+                } else {
+                    userClass.hiv="0";
+                }
+            }
+        });
+
 
         Reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intnt = getIntent();
-                name = intnt.getExtras().getString("NAME1");
-                dob = intnt.getExtras().getString("BDATE1");
-                gender = intnt.getExtras().getString("GENDER1");
-                weight = intnt.getExtras().getString("WEIGHT1");
-                contact = intnt.getExtras().getString("CONTACT1");
-                email = intnt.getExtras().getString("EMAIL1");
-                address = intnt.getExtras().getString("ADDRESS1");
-                city = intnt.getExtras().getString("CITY1");
-                area = intnt.getExtras().getString("AREA1");
-                bgrp = intnt.getExtras().getString("BloodGrp");
-                passwd = intnt.getExtras().getString("PASSWD1");
+
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected void onPreExecute() {
@@ -66,7 +132,7 @@ public class RegistrationActivity3 extends ActionBarActivity {
 
                     @Override
                     protected Void doInBackground(Void... params) {
-                        resp = Call(name, dob, gender, weight, contact, email, address, city, area, bgrp, passwd);
+                        resp = Call(userClass.name,userClass.dob,userClass.gender,userClass.weight,userClass.contact,userClass.privacy,userClass.email,userClass.address,userClass.city,userClass.area,userClass.bgrp,userClass.password,userClass.donation_status,userClass.hiv,userClass.highbp,userClass.tb,userClass.heartd,userClass.amenia,userClass.req_status);
                         return null;
                     }
 
@@ -75,15 +141,22 @@ public class RegistrationActivity3 extends ActionBarActivity {
                         super.onPostExecute(aVoid);
                         Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_LONG).show();
                         dialog.dismiss();
+                        if(resp==1){
+                            PrefUtils.setCurrentUser(userClass,RegistrationActivity3.this);
+                            Intent intent = new Intent(RegistrationActivity3.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Error while inserting...try again", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }.execute();
-                Intent intent = new Intent(RegistrationActivity3.this, LoginActivity.class);
-                startActivity(intent);
+
             }
         });
     }
 
-    public int Call(String c1, String c2, String c3, String c4, String c5, String c6, String c7, String c8, String c9, String c10, String c11)
+    public int Call(String c1, String c2, String c3, String c4, String c5, String c6, String c7, String c8, String c9, String c10, String c11, String c12, String c13, String c14, String c15, String c16, String c17, String c18, String c19)
     {
         SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
         PropertyInfo p1=new PropertyInfo();
@@ -118,41 +191,89 @@ public class RegistrationActivity3 extends ActionBarActivity {
         request.addProperty(p5);
 
         PropertyInfo p6=new PropertyInfo();
-        p6.setName("email");
+        p6.setName("privacy");
         p6.setValue(c6);
         p6.setType(String.class);
         request.addProperty(p6);
 
 
         PropertyInfo p7=new PropertyInfo();
-        p7.setName("address");
+        p7.setName("email");
         p7.setValue(c7);
         p7.setType(String.class);
         request.addProperty(p7);
 
         PropertyInfo p8=new PropertyInfo();
-        p8.setName("city");
+        p8.setName("address");
         p8.setValue(c8);
         p8.setType(String.class);
         request.addProperty(p8);
 
         PropertyInfo p9=new PropertyInfo();
-        p9.setName("area");
+        p9.setName("city");
         p9.setValue(c9);
         p9.setType(String.class);
         request.addProperty(p9);
 
         PropertyInfo p10=new PropertyInfo();
-        p10.setName("bgrp");
+        p10.setName("area");
         p10.setValue(c10);
         p10.setType(String.class);
         request.addProperty(p10);
 
         PropertyInfo p11=new PropertyInfo();
-        p11.setName("passwd");
+        p11.setName("bgrp");
         p11.setValue(c11);
         p11.setType(String.class);
         request.addProperty(p11);
+
+        PropertyInfo p12=new PropertyInfo();
+        p12.setName("password");
+        p12.setValue(c12);
+        p12.setType(String.class);
+        request.addProperty(p12);
+
+        PropertyInfo p13=new PropertyInfo();
+        p13.setName("donation_status");
+        p13.setValue(c13);
+        p13.setType(String.class);
+        request.addProperty(p13);
+
+        PropertyInfo p14=new PropertyInfo();
+        p14.setName("hiv");
+        p14.setValue(c14);
+        p14.setType(String.class);
+        request.addProperty(p14);
+
+        PropertyInfo p15=new PropertyInfo();
+        p15.setName("highbp");
+        p15.setValue(c15);
+        p15.setType(String.class);
+        request.addProperty(p15);
+
+        PropertyInfo p16=new PropertyInfo();
+        p16.setName("tb");
+        p16.setValue(c16);
+        p16.setType(String.class);
+        request.addProperty(p16);
+
+        PropertyInfo p17=new PropertyInfo();
+        p17.setName("heartd");
+        p17.setValue(c17);
+        p17.setType(String.class);
+        request.addProperty(p17);
+
+        PropertyInfo p18=new PropertyInfo();
+        p18.setName("anemia");
+        p18.setValue(c18);
+        p18.setType(String.class);
+        request.addProperty(p18);
+
+        PropertyInfo p19=new PropertyInfo();
+        p19.setName("req_status");
+        p19.setValue(c19);
+        p19.setType(String.class);
+        request.addProperty(p19);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
                 SoapEnvelope.VER11);
