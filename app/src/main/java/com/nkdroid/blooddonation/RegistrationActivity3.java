@@ -28,7 +28,7 @@ public class RegistrationActivity3 extends ActionBarActivity {
 
     private Toolbar toolbar;
     private ProgressDialog dialog;
-    int resp;
+    String resp;
     private CheckBox heartd,tb,highbp,anemia,hiv;
 
     private UserClass userClass;
@@ -141,42 +141,47 @@ public class RegistrationActivity3 extends ActionBarActivity {
                 Log.e("",userClass.heartd+"");
                 Log.e("",userClass.amenia+"");
                 Log.e("",userClass.req_status+"");
-//                new AsyncTask<Void, Void, Void>() {
-//                    @Override
-//                    protected void onPreExecute() {
-//                        super.onPreExecute();
-//                        dialog = new ProgressDialog(RegistrationActivity3.this);
-//                        dialog.setMessage("Loading...");
-//                        dialog.show();
-//                    }
-//
-//                    @Override
-//                    protected Void doInBackground(Void... params) {
-//                        resp = Call(userClass.name,userClass.dob,userClass.gender,userClass.weight,userClass.contact,userClass.privacy,userClass.email,userClass.address,userClass.city,userClass.area,userClass.bgrp,userClass.password,userClass.donation_status,userClass.hiv,userClass.highbp,userClass.tb,userClass.heartd,userClass.amenia,userClass.req_status);
-//                        return null;
-//                    }
-//
-//                    @Override
-//                    protected void onPostExecute(Void aVoid) {
-//                        super.onPostExecute(aVoid);
-//                        Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_LONG).show();
-//                        dialog.dismiss();
-//                        if(resp==1){
-//                            PrefUtils.setCurrentUser(userClass,RegistrationActivity3.this);
-//                            Intent intent = new Intent(RegistrationActivity3.this, HomeActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        }else {
-//                            Toast.makeText(getApplicationContext(), "Error while inserting...try again", Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                }.execute();
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected void onPreExecute() {
+                        super.onPreExecute();
+                        dialog = new ProgressDialog(RegistrationActivity3.this);
+                        dialog.setMessage("Loading...");
+                        dialog.show();
+                    }
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        resp = Call(userClass.name,userClass.dob,userClass.gender,userClass.weight,userClass.contact,userClass.privacy,userClass.email,userClass.address,userClass.city,userClass.area,userClass.bgrp,userClass.password,userClass.donation_status,userClass.hiv,userClass.highbp,userClass.tb,userClass.heartd,userClass.amenia,userClass.req_status);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        try {
+                            Log.e("response",resp+"");
+//                            Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_LONG).show();
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                        if(resp.equalsIgnoreCase("1")){
+                            PrefUtils.setCurrentUser(userClass,RegistrationActivity3.this);
+                            Intent intent = new Intent(RegistrationActivity3.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Error while inserting...try again", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }.execute();
 
             }
         });
     }
 
-    public int Call(String c1, String c2, String c3, String c4, String c5, String c6, String c7, String c8, String c9, String c10, String c11, String c12, String c13, String c14, String c15, String c16, String c17, String c18, String c19)
+    public String Call(String c1, String c2, String c3, String c4, String c5, String c6, String c7, String c8, String c9, String c10, String c11, String c12, String c13, String c14, String c15, String c16, String c17, String c18, String c19)
     {
         SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
         PropertyInfo p1=new PropertyInfo();
@@ -319,7 +324,7 @@ public class RegistrationActivity3 extends ActionBarActivity {
             //displayExceptionMessage(ex.getMessage());
             //System.out.println(exception.getMessage());
         }
-        return Integer.parseInt(response.toString());
+        return response.toString();
     }
 
     private void setToolbar() {

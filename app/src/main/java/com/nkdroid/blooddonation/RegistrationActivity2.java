@@ -340,7 +340,7 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
             // Transfer completed
             System.out.println(" completed ...");
             progressDialog.dismiss();
-            Toast.makeText(getApplication(), " completed ...", Toast.LENGTH_LONG).show();
+//           Toast.makeText(getApplication(), " completed ...", Toast.LENGTH_LONG).show();
 
         }
 

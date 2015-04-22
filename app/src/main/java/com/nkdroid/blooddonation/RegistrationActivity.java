@@ -271,7 +271,7 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
                                 userClass.gender=radioButton.getText().toString();
                                 userClass.address=address.getText().toString();
                                 userClass.city=city.get(ecity.getSelectedItemPosition());
-                                userClass.area=area.get(earea.getSelectedItemPosition()).area;
+                                userClass.area=area.get(earea.getSelectedItemPosition()).city;
                                 userClass.weight=weight.getText().toString();
                                 userClass.contact=contact.getText().toString();
                                 userClass.email=email.getText().toString();
