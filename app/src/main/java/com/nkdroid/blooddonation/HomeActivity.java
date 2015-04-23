@@ -132,7 +132,7 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
         }
 
         class ViewHolder {
-            TextView txtPostTitle,txtPostDate,txtPostDescription;
+            TextView txtPostTitle,txtPostDate,txtPostDescription,city;
 
         }
 
@@ -146,14 +146,15 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
                 holder.txtPostTitle = (TextView) convertView.findViewById(R.id.title);
                 holder.txtPostDate = (TextView) convertView.findViewById(R.id.date);
                 holder.txtPostDescription = (TextView) convertView.findViewById(R.id.description);
+                holder.city = (TextView) convertView.findViewById(R.id.city);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.txtPostTitle.setText(postArrayList.get(position).Title);
-//            holder.txtPostDate.setText(postArrayList.get(position).getPost_date());
-//            holder.txtPostDescription.setText(postArrayList.get(position).getDescription());
-
+            holder.txtPostDate.setText(postArrayList.get(position).End_Date);
+            holder.txtPostDescription.setText(postArrayList.get(position).Description);
+            holder.city.setText(postArrayList.get(position).City);
 
             return convertView;
         }
@@ -449,7 +450,7 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
                 }
                 mylist.remove(0);
 
-                final int partitionSize =2;
+                final int partitionSize =4;
                 List<List<String>> partitions = new LinkedList<List<String>>();
                 for (int i = 0; i < mylist.size(); i += partitionSize) {
                     partitions.add(mylist.subList(i,
