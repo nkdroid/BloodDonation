@@ -2,6 +2,7 @@ package com.nkdroid.blooddonation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -32,14 +34,27 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.nkdroid.blooddonation.model.Area;
+import com.nkdroid.blooddonation.model.Notification;
+
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.SoapFault;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class HomeActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener {
     private Toolbar toolbar;
+    private ProgressDialog dialog;
     private SliderLayout mDemoSlider;
     private Button btnLogout;
     private DrawerLayout drawerLayout;
@@ -47,11 +62,14 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
     private ListView leftDrawerList;
     private GoogleCloudMessaging gcm;
     private String regid;
-
+    Object response;
     private ListView postListView;
-    private ArrayList<String> postArrayList;
+    private ArrayList<Notification> postArrayList;
     private PostAdapter postAdapter;
-
+    public static final String SOAP_ACTION = "http://tempuri.org/getNotice";
+    public static  final String OPERATION_NAME = "getNotice";
+    public static  final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";
+    public static  final String SOAP_ADDRESS = "http://donateblood.somee.com/WebService.asmx";
 
 
     private String PROJECT_NUMBER = "92884720384";
@@ -78,45 +96,24 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
         initDrawer();
         getRegId();
         setImageSlider();
-        notify_list();
+//        notify_list();
+        getNotifications();
     }
 
     public void notify_list()
     {
-        postArrayList=new ArrayList<String>();
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postListView=(ListView)findViewById(R.id.listView);
-        postAdapter=new PostAdapter(HomeActivity.this,postArrayList);
-        postListView.setAdapter(postAdapter);
+
     }
 
 
     public class PostAdapter extends BaseAdapter {
 
         Context context;
-        ArrayList<String> postArrayList;
+        ArrayList<Notification> postArrayList;
 
 
-        public PostAdapter(Context context, ArrayList<String> postArrayList) {
+
+        public PostAdapter(Context context, ArrayList<Notification> postArrayList) {
 
             this.context = context;
             this.postArrayList = postArrayList;
@@ -153,7 +150,7 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.txtPostTitle.setText(postArrayList.get(position));
+            holder.txtPostTitle.setText(postArrayList.get(position).Title);
 //            holder.txtPostDate.setText(postArrayList.get(position).getPost_date());
 //            holder.txtPostDescription.setText(postArrayList.get(position).getDescription());
 
@@ -393,5 +390,86 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
 
+    private void getNotifications() {
+
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                dialog=new ProgressDialog(HomeActivity.this);
+                dialog.setMessage("Loading...");
+                dialog.show();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                envelope.dotNet = true;
+                envelope.setOutputSoapObject(request);
+                HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
+                httpTransport.debug=true;
+                try {
+                    httpTransport.call(SOAP_ACTION, envelope);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    response=  envelope.getResponse();
+                    Log.e("response: ", response.toString() + "");
+                } catch (SoapFault soapFault) {
+                    soapFault.printStackTrace();
+                    Log.e("response: ", response.toString() + "");
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                dialog.dismiss();
+
+                try {
+
+                    Log.e("response: ", response.toString() + "");
+                }catch(Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(HomeActivity.this,response.toString()+"",Toast.LENGTH_LONG).show();
+                }
+                StringTokenizer tokens = new StringTokenizer(response.toString(), "=");
+                List<String> mylist=new ArrayList<String>();
+                for(int i=0;tokens.hasMoreTokens();i++){
+                    StringTokenizer tokens1 = new StringTokenizer(tokens.nextToken(), ";");
+
+                    mylist.add(tokens1.nextToken());
+                }
+                mylist.remove(0);
+
+                final int partitionSize =2;
+                List<List<String>> partitions = new LinkedList<List<String>>();
+                for (int i = 0; i < mylist.size(); i += partitionSize) {
+                    partitions.add(mylist.subList(i,
+                            i + Math.min(partitionSize, mylist.size() - i)));
+                }
+
+                postArrayList=new ArrayList<Notification>();
+                for(int k=0;k<partitions.size();k++){
+                    postArrayList.add(new Notification(partitions.get(k).get(0),partitions.get(k).get(1),partitions.get(k).get(2),partitions.get(k).get(3)));
+                }
+
+
+                postListView=(ListView)findViewById(R.id.listView);
+                postAdapter=new PostAdapter(HomeActivity.this,postArrayList);
+                postListView.setAdapter(postAdapter);
+
+            }
+
+        }.execute();
+
+    }
 
 }
