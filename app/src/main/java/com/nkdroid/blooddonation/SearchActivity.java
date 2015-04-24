@@ -1,12 +1,15 @@
 package com.nkdroid.blooddonation;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +18,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nkdroid.blooddonation.model.BloodBank;
+
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.SoapFault;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 
 public class SearchActivity extends ActionBarActivity {
@@ -26,50 +43,112 @@ public class SearchActivity extends ActionBarActivity {
     private ListView postListView;
     private ArrayList<String> postArrayList;
     private PostAdapter postAdapter;
+    private ProgressDialog dialog;
+    Object response;
+    private ArrayList<BloodBank> bankList;
+    public static final String SOAP_ACTION1 = "http://tempuri.org/SearchBloodBank";
+    public static  final String OPERATION_NAME1 = "SearchBloodBank";
+    public static  final String WSDL_TARGET_NAMESPACE1 = "http://tempuri.org/";
+    public static  final String SOAP_ADDRESS1 = "http://donateblood.somee.com/WebService.asmx";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         setToolbar();
-        postArrayList=new ArrayList<String>();
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postArrayList.add("title 1");
-        postArrayList.add("title 2");
-        postArrayList.add("title 3");
-        postArrayList.add("title 4");
-        postArrayList.add("title 5");
-        postListView=(ListView)findViewById(R.id.listView);
-        postAdapter=new PostAdapter(SearchActivity.this,postArrayList);
-        postListView.setAdapter(postAdapter);
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                dialog=new ProgressDialog(SearchActivity.this);
+                dialog.setMessage("Loading...");
+                dialog.show();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE1,OPERATION_NAME1);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                envelope.dotNet = true;
+                envelope.setOutputSoapObject(request);
+                HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS1);
+                httpTransport.debug=true;
+                try {
+                    httpTransport.call(SOAP_ACTION1, envelope);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    response=  envelope.getResponse();
+                    Log.e("response: ", response.toString() + "");
+                } catch (SoapFault soapFault) {
+                    soapFault.printStackTrace();
+                    Log.e("response: ", response.toString() + "");
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                dialog.dismiss();
+
+                try {
+
+                    Log.e("response: ", response.toString() + "");
+                }catch(Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(SearchActivity.this, response.toString() + "", Toast.LENGTH_LONG).show();
+                }
+                StringTokenizer tokens = new StringTokenizer(response.toString(), "=");
+                List<String> mylist=new ArrayList<String>();
+                for(int i=0;tokens.hasMoreTokens();i++){
+                    StringTokenizer tokens1 = new StringTokenizer(tokens.nextToken(), ";");
+
+                    mylist.add(tokens1.nextToken());
+                }
+                mylist.remove(0);
+
+                int partitionSize =7;
+                List<List<String>> partitions = new LinkedList<List<String>>();
+                for (int i = 0; i < mylist.size(); i += partitionSize) {
+                    partitions.add(mylist.subList(i,
+                            i + Math.min(partitionSize, mylist.size() - i)));
+                }
+
+                bankList=new ArrayList<BloodBank>();
+                for(int k=0;k<partitions.size();k++){
+                    bankList.add(new BloodBank(partitions.get(k).get(0),partitions.get(k).get(1),partitions.get(k).get(2),partitions.get(k).get(3),partitions.get(k).get(4),partitions.get(k).get(5),partitions.get(k).get(6)));
+                }
+
+                postListView=(ListView)findViewById(R.id.listView);
+                postAdapter=new PostAdapter(SearchActivity.this,bankList);
+                postListView.setAdapter(postAdapter);
+
+
+            }
+
+        }.execute();
+
     }
 
     public class PostAdapter extends BaseAdapter {
 
         Context context;
-        ArrayList<String> postArrayList;
-        ArrayList<String> arraylist;
+        ArrayList<BloodBank> postArrayList;
+        ArrayList<BloodBank> arraylist;
 
 
-        public PostAdapter(Context context, ArrayList<String> postArrayList) {
+        public PostAdapter(Context context, ArrayList<BloodBank> postArrayList) {
 
             this.context = context;
             this.postArrayList = postArrayList;
-            arraylist = new ArrayList<String>();
+            arraylist = new ArrayList<BloodBank>();
             arraylist.addAll(postArrayList);
         }
 
@@ -106,7 +185,7 @@ public class SearchActivity extends ActionBarActivity {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.txtPostTitle.setText(postArrayList.get(position));
+            holder.txtPostTitle.setText(postArrayList.get(position).Name);
 //            holder.txtPostDate.setText(postArrayList.get(position).getPost_date());
 //            holder.txtPostDescription.setText(postArrayList.get(position).getDescription());
 
@@ -123,8 +202,8 @@ public class SearchActivity extends ActionBarActivity {
                 postArrayList.addAll(arraylist);
 
             } else {
-                for (String movieDetails : arraylist) {
-                    if (charText.length() != 0 && movieDetails.toLowerCase(Locale.getDefault()).contains(charText)) {
+                for (BloodBank movieDetails : arraylist) {
+                    if (charText.length() != 0 && movieDetails.Name.toLowerCase(Locale.getDefault()).contains(charText)) {
                         postArrayList.add(movieDetails);
                     }
 
