@@ -23,4 +23,5 @@
     <string name="title_activity_pager_sliding_tab_strip">PagerSlidingTabStrip</string>
     <string name="title_activity_registration_activity2">RegistrationActivity2</string>
     <string name="title_activity_registration_activity3">RegistrationActivity3</string>
+    <string name="title_activity_logout">LogoutActivity</string>
 </resources>

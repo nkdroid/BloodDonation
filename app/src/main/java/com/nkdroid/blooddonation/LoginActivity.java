@@ -33,6 +33,7 @@ public class LoginActivity extends ActionBarActivity {
     private EditText etUsername,etPassword;
     private TextView btnNewRegistration;
     private TextView btnLogin;
+    private TextView btnForgot;
         private  ProgressDialog dialog;
     private ArrayList<UserClass> profileList;
     Object response;
@@ -72,6 +73,13 @@ public class LoginActivity extends ActionBarActivity {
     }
 
     private void initView() {
+        btnForgot= (TextView) findViewById(R.id.btnForgot);
+        btnForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
         etUsername= (EditText) findViewById(R.id.etUsername);
         etPassword= (EditText) findViewById(R.id.etPassword);
         btnLogin= (TextView) findViewById(R.id.btnLogin);

@@ -49,6 +49,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -308,6 +309,17 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
 
     }
 
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        Calendar userAge = new GregorianCalendar(year,month,day);
+        Calendar minAdultAge = new GregorianCalendar();
+        minAdultAge.add(Calendar.YEAR, -18);
+        if (minAdultAge.before(userAge))
+        {
+           Toast.makeText(RegistrationActivity.this,"Please enter valid date",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
     private void callGetArea() {
 
         new AsyncTask<Void,Void,Void>(){
@@ -414,9 +426,16 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
         fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                bdate.setText(dateFormatter.format(newDate.getTime()));
+                Calendar userAge = new GregorianCalendar(year,monthOfYear,dayOfMonth);
+                Calendar minAdultAge = new GregorianCalendar();
+                minAdultAge.add(Calendar.YEAR, -18);
+                if (minAdultAge.before(userAge))
+                {
+                  Toast.makeText(RegistrationActivity.this,"Please Enter Valid Date",Toast.LENGTH_LONG).show();
+                } else {
+                    bdate.setText(dateFormatter.format(userAge.getTime()));
+                }
+
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));

@@ -36,6 +36,7 @@ public class SettingActivity extends ActionBarActivity {
     private UserClass user;
     String resp;
     private  ProgressDialog dialog;
+    private RadioButton rpublic,rprivate;
 
     public static final String SOAP_ACTION = "http://tempuri.org/UpdateMyDStatus";
     public static  final String OPERATION_NAME = "UpdateMyDStatus";
@@ -59,30 +60,39 @@ public class SettingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_setting);
         tbtndonation= (Switch) findViewById(R.id.tbtndonation);
         radioGroup= (RadioGroup) findViewById(R.id.radioGroup);
-        selectedId=radioGroup.getCheckedRadioButtonId();
-        radioButton= (RadioButton) findViewById(selectedId);
-//        if(radioButton.getText().toString().trim().equalsIgnoreCase("Public")) {
-//
-//        }else {
-//
-//        }
-//        user=PrefUtils.getCurrentUser(SettingActivity.this);
-//
-//        if(user.donation_status.equalsIgnoreCase("1")){
-//            tbtndonation.setChecked(true);
-//        } else {
-//            tbtndonation.setChecked(false);
-//        }
+        rpublic= (RadioButton) findViewById(R.id.rpublic);
+        rprivate= (RadioButton) findViewById(R.id.rprivate);
+
+        user=PrefUtils.getCurrentUser(SettingActivity.this);
+
+        if(user.privacy.equalsIgnoreCase("1")){
+            radioGroup.check(R.id.rpublic);
+        } else {
+            radioGroup.check(R.id.rprivate);
+        }
+        if(user.donation_status.equalsIgnoreCase("1")){
+            tbtndonation.setChecked(true);
+        } else {
+            tbtndonation.setChecked(false);
+        }
 
         radioGroup.setOnCheckedChangeListener( new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                radioButton= (RadioButton) findViewById(checkedId);
-                        if(radioButton.getText().toString().trim().equalsIgnoreCase("Public")) {
-                            updatePrivacyStatus(1);
-        }else {
-                            updatePrivacyStatus(0);
-        }
+
+                switch (checkedId){
+
+                    case R.id.rpublic:
+                        Log.e("call","public");
+                        updatePrivacyStatus(1);
+                        break;
+
+                    case R.id.rprivate:
+                        Log.e("call","private");
+                        updatePrivacyStatus(0);
+                        break;
+                }
+
             }
         });
         tbtndonation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -114,7 +124,7 @@ public class SettingActivity extends ActionBarActivity {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    resp = updatePrivacy("a@a.com", "0" + "");
+                    resp = updatePrivacy(user.email, i + "");
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -134,12 +144,12 @@ public class SettingActivity extends ActionBarActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    Toast.makeText(getApplicationContext(), "Privacy Status Updated Successfully" + resp, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Privacy Status Updated Successfully" , Toast.LENGTH_LONG).show();
 
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Authentication Error" + resp, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Authentication Error" , Toast.LENGTH_LONG).show();
                 }
             }
         }.execute();
@@ -161,7 +171,7 @@ public class SettingActivity extends ActionBarActivity {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    resp = loginCall("a@a.com", "1" + "");
+                    resp = loginCall(user.email, i + "");
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -181,12 +191,12 @@ public class SettingActivity extends ActionBarActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    Toast.makeText(getApplicationContext(), "Status Updated Successfully" + resp, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Status Updated Successfully" , Toast.LENGTH_LONG).show();
 
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Authentication Error" + resp, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Authentication Error", Toast.LENGTH_LONG).show();
                 }
             }
         }.execute();

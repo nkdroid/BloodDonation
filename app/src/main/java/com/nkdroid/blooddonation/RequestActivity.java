@@ -97,17 +97,7 @@ public class RequestActivity extends ActionBarActivity {
 
                 SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE1,OPERATION_NAME1);
 
-                PropertyInfo p1=new PropertyInfo();
-                p1.setName("bgroup");
-                p1.setValue("A+");
-                p1.setType(String.class);
-                request.addProperty(p1);
 
-                PropertyInfo p2=new PropertyInfo();
-                p2.setName("city");
-                p2.setValue("Baroda");
-                p2.setType(String.class);
-                request.addProperty(p2);
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 envelope.dotNet = true;
                 envelope.setOutputSoapObject(request);
@@ -190,13 +180,13 @@ public class RequestActivity extends ActionBarActivity {
 
                 PropertyInfo p1=new PropertyInfo();
                 p1.setName("bgroup");
-                p1.setValue("A+");
+                p1.setValue(bgrp.get(spbloodgroup.getSelectedItemPosition()));
                 p1.setType(String.class);
                 request.addProperty(p1);
 
                 PropertyInfo p2=new PropertyInfo();
                 p2.setName("city");
-                p2.setValue("Baroda");
+                p2.setValue(city.get(spcity.getSelectedItemPosition()));
                 p2.setType(String.class);
                 request.addProperty(p2);
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
