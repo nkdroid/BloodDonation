@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nkdroid.blooddonation.SearchResultActivity">
+    <include layout="@layout/app_bar"/>
+    <ListView
+        android:padding="16dp"
+        android:id="@+id/searchRequest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:divider="#ccc"
+        android:dividerHeight="1dp"
+        />
+</LinearLayout>

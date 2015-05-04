@@ -439,8 +439,6 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-
     }
 
     public boolean isEmptyField(EditText param1) {

@@ -77,7 +77,8 @@ public class LoginActivity extends ActionBarActivity {
         btnForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+             Intent intent=new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
         etUsername= (EditText) findViewById(R.id.etUsername);

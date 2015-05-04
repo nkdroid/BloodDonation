@@ -2,6 +2,7 @@ package com.nkdroid.blooddonation;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -244,9 +245,14 @@ public class RequestActivity extends ActionBarActivity {
                 for(int k=0;k<partitions.size();k++){
                     searchUsersList.add(new UserClass(partitions.get(k).get(0),partitions.get(k).get(1),partitions.get(k).get(2),partitions.get(k).get(3),partitions.get(k).get(4),partitions.get(k).get(5),partitions.get(k).get(6),partitions.get(k).get(7),partitions.get(k).get(8),partitions.get(k).get(9),partitions.get(k).get(10),partitions.get(k).get(11),partitions.get(k).get(12),partitions.get(k).get(13),partitions.get(k).get(14),partitions.get(k).get(15),partitions.get(k).get(16),partitions.get(k).get(17),partitions.get(k).get(18),partitions.get(k).get(19)));
                 }
+                SearchUser searchUser=new SearchUser();
+                searchUser.searchUserList=searchUsersList;
+                PrefUtils.setSearchUsers(searchUser,RequestActivity.this);
 
                 Log.e("search result",searchUsersList.size()+"");
 
+                Intent i =new Intent(RequestActivity.this,SearchResultActivity.class);
+                startActivity(i);
             }
 
         }.execute();

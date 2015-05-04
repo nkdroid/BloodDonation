@@ -167,7 +167,7 @@ public class SearchActivity extends ActionBarActivity {
 
 
         class ViewHolder {
-            TextView txtPostTitle,txtPostDate,txtPostDescription;
+            TextView txtPostTitle,mobile,address,email;
 
         }
 
@@ -179,16 +179,18 @@ public class SearchActivity extends ActionBarActivity {
                 convertView = mInflater.inflate(R.layout.item_notificationview, parent, false);
                 holder = new ViewHolder();
                 holder.txtPostTitle = (TextView) convertView.findViewById(R.id.textView);
-                holder.txtPostDate = (TextView) convertView.findViewById(R.id.textView2);
-                holder.txtPostDescription = (TextView) convertView.findViewById(R.id.textView3);
+                holder.mobile = (TextView) convertView.findViewById(R.id.mobile);
+                holder.address = (TextView) convertView.findViewById(R.id.address);
+                holder.email = (TextView) convertView.findViewById(R.id.email);
+
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.txtPostTitle.setText(postArrayList.get(position).Name);
-//            holder.txtPostDate.setText(postArrayList.get(position).getPost_date());
-//            holder.txtPostDescription.setText(postArrayList.get(position).getDescription());
-
+            holder.mobile.setText(postArrayList.get(position).Contact);
+            holder.address.setText(postArrayList.get(position).Address);
+            holder.email.setText(postArrayList.get(position).Email);
 
             return convertView;
         }

@@ -67,6 +67,19 @@ public class PrefUtils  {
     }
 
 
+    public static void setSearchUsers(SearchUser currentUser, Context ctx){
+
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(ctx, "search_user_prefs", 0);
+        complexPreferences.putObject("search__user_value", currentUser);
+        complexPreferences.commit();
+    }
+
+    public static SearchUser getSearchUsers(Context ctx){
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(ctx, "search_user_prefs", 0);
+        SearchUser currentUser = complexPreferences.getObject("search__user_value", SearchUser.class);
+        return currentUser;
+    }
+
 
 
 }
