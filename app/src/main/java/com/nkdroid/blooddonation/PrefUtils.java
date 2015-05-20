@@ -32,6 +32,7 @@ public class PrefUtils  {
         return sp.getBoolean("isLogin", false);
     }
 
+
     public static User getLoggedIn(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         User user=new User();
