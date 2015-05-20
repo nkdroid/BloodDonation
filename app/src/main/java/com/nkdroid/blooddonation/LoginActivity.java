@@ -88,8 +88,14 @@ public class LoginActivity extends ActionBarActivity {
         btnForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             Intent intent=new Intent(LoginActivity.this,ForgotPasswordActivity.class);
-                startActivity(intent);
+                if(isNetworkAvailable()) {
+                    Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                }
             }
         });
         etUsername= (EditText) findViewById(R.id.etUsername);
@@ -118,46 +124,50 @@ public class LoginActivity extends ActionBarActivity {
                 } else if (isEmptyField(etPassword)) {
                     Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
                 } else {
-                    uname = etUsername.getText().toString();
-                    passwd = etPassword.getText().toString();
-                    // if( user.getUsername().equals(etUsername.getText().toString().trim()) && user.getPassword().equals(etPassword.getText().toString().trim())){
 
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            dialog = new ProgressDialog(LoginActivity.this);
-                            dialog.setMessage("Loading...");
-                            dialog.show();
-                        }
+                    if(isNetworkAvailable()) {
 
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            resp = loginCall(uname,passwd);
-                            return null;
-                        }
+                        uname = etUsername.getText().toString();
+                        passwd = etPassword.getText().toString();
+                        // if( user.getUsername().equals(etUsername.getText().toString().trim()) && user.getPassword().equals(etPassword.getText().toString().trim())){
 
-                        @Override
-                        protected void onPostExecute(Void aVoid) {
-                            super.onPostExecute(aVoid);
-                            Log.e("Response",resp+"");
-                            dialog.dismiss();
-                            if(resp==1)
-                            {
-                                User user = PrefUtils.getLoggedIn(LoginActivity.this);
-                                PrefUtils.setLoggedIn(LoginActivity.this, true, user.getUsername(), user.getPassword());
-                                Log.e("username", user.getUsername() + "");
-                                getProfileData();
-
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected void onPreExecute() {
+                                super.onPreExecute();
+                                dialog = new ProgressDialog(LoginActivity.this);
+                                dialog.setMessage("Loading...");
+                                dialog.show();
                             }
-                            else
-                            {
-                                Toast.makeText(getApplicationContext(), "Authentication Error"+resp, Toast.LENGTH_LONG).show();
+
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                resp = loginCall(uname, passwd);
+                                return null;
                             }
-                        }
-                    }.execute();
 
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                super.onPostExecute(aVoid);
+                                Log.e("Response", resp + "");
+                                dialog.dismiss();
+                                if (resp == 1) {
+                                    User user = PrefUtils.getLoggedIn(LoginActivity.this);
+                                    PrefUtils.setLoggedIn(LoginActivity.this, true, user.getUsername(), user.getPassword());
+                                    Log.e("username", user.getUsername() + "");
+                                    getProfileData();
 
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Authentication Error" + resp, Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }.execute();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(LoginActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

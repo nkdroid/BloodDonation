@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.NavUtils;
@@ -102,12 +104,21 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
     Spinner spcity;
     Spinner sparea;
 
+    private boolean isNetworkAvailable()
+    {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo !=null && activeNetworkInfo.isConnected();
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(isNetworkAvailable()) {
         setContentView(R.layout.activity_profile2);
+
+
 
         userClass=PrefUtils.getCurrentUser(ProfileActivity.this);
         setToolbar();
@@ -144,6 +155,7 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
                     soapFault.printStackTrace();
                     Log.e("response: ", response.toString() + "");
                 }
+
 
                 return null;
             }
@@ -295,6 +307,7 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
                     Toast.makeText(ProfileActivity.this, "Please Enter Contact", Toast.LENGTH_LONG).show();
                 }
                 else {
+                    if(isNetworkAvailable()) {
                     userClass.name=name.getText().toString();
                     userClass.dob=bdate.getText().toString();
                     int selectedId = rg.getCheckedRadioButtonId();
@@ -345,11 +358,20 @@ public class ProfileActivity extends ActionBarActivity implements AdapterView.On
                         }
                     }.execute();
 
-
+                    }
+                    else
+                    {
+                        Toast.makeText(ProfileActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
 
+        }
+        else
+        {
+            Toast.makeText(ProfileActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+        }
     }
 
 

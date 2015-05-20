@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -56,6 +58,13 @@ public class RequestActivity extends ActionBarActivity {
     private TextView btnreq;
     private ArrayList<UserClass> searchUsersList;
 
+    private boolean isNetworkAvailable()
+    {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo !=null && activeNetworkInfo.isConnected();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +75,10 @@ public class RequestActivity extends ActionBarActivity {
         btnreq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchUsers();
+                if(isNetworkAvailable()) {searchUsers();}else
+                    {
+                        Toast.makeText(RequestActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                    }
             }
         });
         bgrp.add("A+");

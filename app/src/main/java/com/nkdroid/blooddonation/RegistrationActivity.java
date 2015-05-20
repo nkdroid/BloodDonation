@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -93,6 +95,12 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
     public RegistrationActivity() {
     }
 
+    private boolean isNetworkAvailable()
+    {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo !=null && activeNetworkInfo.isConnected();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,67 +250,72 @@ public class RegistrationActivity extends ActionBarActivity implements AdapterVi
                     Toast.makeText(RegistrationActivity.this, "Password doesn't match", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            dialog = new ProgressDialog(RegistrationActivity.this);
-                            dialog.setMessage("Loading...");
-                            dialog.show();
-                        }
 
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            resp = loginCall(email.getText().toString().trim());
-                            return null;
-                        }
+                    if(isNetworkAvailable()) {
 
-                        @Override
-                        protected void onPostExecute(Void aVoid) {
-                            super.onPostExecute(aVoid);
-                            Log.e("Response",resp+"");
-                            dialog.dismiss();
-                            if(resp==1)
-                            {
-                                UserClass userClass=new UserClass();
-                                userClass.name=name.getText().toString();
-                                userClass.dob=bdate.getText().toString();
-                                int selectedId = rg.getCheckedRadioButtonId();
-                                RadioButton radioButton = (RadioButton) findViewById(selectedId);
-                                userClass.gender=radioButton.getText().toString();
-                                userClass.address=address.getText().toString();
-                                userClass.city=city.get(ecity.getSelectedItemPosition());
-                                userClass.area=area.get(earea.getSelectedItemPosition()).city;
-                                userClass.weight=weight.getText().toString();
-                                userClass.contact=contact.getText().toString();
-                                userClass.email=email.getText().toString();
-                                userClass.password=password.getText().toString();
-
-                                Log.e("name",userClass.name+"");
-                                Log.e("dob",userClass.dob+"");
-                                Log.e("gender",userClass.gender+"");
-                                Log.e("address",userClass.address+"");
-                                Log.e("city",userClass.city+"");
-                                Log.e("area",userClass.area+"");
-                                Log.e("weight",userClass.weight+"");
-                                Log.e("contact",userClass.contact+"");
-                                Log.e("email",userClass.email+"");
-                                Log.e("password",userClass.password+"");
-
-
-                                PrefUtils.setCurrentUser(userClass,RegistrationActivity.this);
-
-                                Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity2.class);
-                                startActivity(intent);
-                                finish();
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected void onPreExecute() {
+                                super.onPreExecute();
+                                dialog = new ProgressDialog(RegistrationActivity.this);
+                                dialog.setMessage("Loading...");
+                                dialog.show();
                             }
-                            else
-                            {
-                                Toast.makeText(getApplicationContext(), "Email Already Exist", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    }.execute();
 
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                resp = loginCall(email.getText().toString().trim());
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                super.onPostExecute(aVoid);
+                                Log.e("Response", resp + "");
+                                dialog.dismiss();
+                                if (resp == 1) {
+                                    UserClass userClass = new UserClass();
+                                    userClass.name = name.getText().toString();
+                                    userClass.dob = bdate.getText().toString();
+                                    int selectedId = rg.getCheckedRadioButtonId();
+                                    RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                                    userClass.gender = radioButton.getText().toString();
+                                    userClass.address = address.getText().toString();
+                                    userClass.city = city.get(ecity.getSelectedItemPosition());
+                                    userClass.area = area.get(earea.getSelectedItemPosition()).city;
+                                    userClass.weight = weight.getText().toString();
+                                    userClass.contact = contact.getText().toString();
+                                    userClass.email = email.getText().toString();
+                                    userClass.password = password.getText().toString();
+
+                                    Log.e("name", userClass.name + "");
+                                    Log.e("dob", userClass.dob + "");
+                                    Log.e("gender", userClass.gender + "");
+                                    Log.e("address", userClass.address + "");
+                                    Log.e("city", userClass.city + "");
+                                    Log.e("area", userClass.area + "");
+                                    Log.e("weight", userClass.weight + "");
+                                    Log.e("contact", userClass.contact + "");
+                                    Log.e("email", userClass.email + "");
+                                    Log.e("password", userClass.password + "");
+
+
+                                    PrefUtils.setCurrentUser(userClass, RegistrationActivity.this);
+
+                                    Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity2.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Email Already Exist", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }.execute();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(RegistrationActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

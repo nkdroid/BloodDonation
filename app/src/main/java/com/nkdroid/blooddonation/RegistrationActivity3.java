@@ -1,7 +1,10 @@
 package com.nkdroid.blooddonation;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -39,6 +42,13 @@ public class RegistrationActivity3 extends ActionBarActivity {
 
     //public  final String SOAP_ADDRESS = "http://artist.somee.com/DPR.asmx";
     public static  final String SOAP_ADDRESS = "http://donateblood.somee.com/WebService.asmx";
+
+    private boolean isNetworkAvailable()
+    {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo !=null && activeNetworkInfo.isConnected();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +131,7 @@ public class RegistrationActivity3 extends ActionBarActivity {
         Reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isNetworkAvailable()) {
 
                 Log.e("",userClass.name+"");
                 Log.e("",userClass.dob+"");
@@ -176,6 +187,11 @@ public class RegistrationActivity3 extends ActionBarActivity {
                         }
                     }
                 }.execute();
+                }
+                else
+                {
+                    Toast.makeText(RegistrationActivity3.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                }
 
             }
         });

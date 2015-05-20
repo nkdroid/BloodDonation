@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -94,10 +96,23 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
         setToolbar();
         initView();
         initDrawer();
-        getRegId();
+
         setImageSlider();
 //        notify_list();
+        if(isNetworkAvailable()) {
+        getRegId();
         getNotifications();
+        }
+        else
+        {
+            Toast.makeText(HomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+        }
+    }
+    private boolean isNetworkAvailable()
+    {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo !=null && activeNetworkInfo.isConnected();
     }
 
     public void notify_list()
@@ -296,31 +311,55 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
                 @Override
                 public void onClick(View v) {
                     if (position == 0) {
-                        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-                        startActivity(intent);
-                    }else if (position == 1) {
-                        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-                        startActivity(intent);
-                    }else if (position == 2) {
-                        Intent intent = new Intent(HomeActivity.this, InboxActivity.class);
-                        startActivity(intent);
-                    }else if (position == 3) {
-                        Intent intent = new Intent(HomeActivity.this, RequestActivity.class);
-                        startActivity(intent);
-                    }else if (position == 4) {
+                        if (isNetworkAvailable()) {
+                            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (position == 1) {
+                        if (isNetworkAvailable()) {
+                            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (position == 2) {
+                        if (isNetworkAvailable()) {
+                            Intent intent = new Intent(HomeActivity.this, InboxActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (position == 3) {
+                        if (isNetworkAvailable()) {
+                            Intent intent = new Intent(HomeActivity.this, RequestActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (position == 4) {
                         Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
                         startActivity(intent);
-                    }else if (position == 5) {
+                    } else if (position == 5) {
                         Intent intent = new Intent(HomeActivity.this, ContactUsActivity.class);
                         startActivity(intent);
-                    }else if (position == 6) {
-                        Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
-                        startActivity(intent);
-                    }else if (position == 7) {
+                    } else if (position == 6) {
+                        if (isNetworkAvailable()) {
+                            Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (position == 7) {
                         PrefUtils.clearLogin(HomeActivity.this);
-                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                        if (isNetworkAvailable()) {
+                            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             });
