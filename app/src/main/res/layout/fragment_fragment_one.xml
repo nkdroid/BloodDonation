@@ -3,7 +3,14 @@
     android:layout_height="match_parent"
     tools:context="com.nkdroid.blooddonation.FragmentOne">
 
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="fragment 1" />
+    <ListView
+        android:padding="16dp"
+        android:id="@+id/searchRequest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:divider="#ccc"
+        android:dividerHeight="1dp"
+        />
 
 </RelativeLayout>

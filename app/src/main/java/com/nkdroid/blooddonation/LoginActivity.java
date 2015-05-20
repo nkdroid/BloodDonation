@@ -1,7 +1,10 @@
 package com.nkdroid.blooddonation;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -72,6 +75,14 @@ public class LoginActivity extends ActionBarActivity {
         initView();
     }
 
+
+    private boolean isNetworkAvailable()
+    {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo !=null && activeNetworkInfo.isConnected();
+    }
+
     private void initView() {
         btnForgot= (TextView) findViewById(R.id.btnForgot);
         btnForgot.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +99,15 @@ public class LoginActivity extends ActionBarActivity {
         btnNewRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
-                startActivity(intent);
+
+                if(isNetworkAvailable()) {
+                    Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                }
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {

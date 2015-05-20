@@ -1,199 +1,285 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
 
-    tools:context="com.nkdroid.blooddonation.ProfileActivity"
-    android:background="@drawable/background">
-
+    android:background="@drawable/background"
+    tools:context="com.nkdroid.registrationlogin.RegistrationActivity">
     <include layout="@layout/app_bar"/>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-
-    <LinearLayout
+    <ScrollView
+        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvname"
-            android:hint="Name: "
-            android:textColorHint="#000000"
-            android:textSize="20dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etname"
-            android:hint="Niti Choksi"
-            android:textColorHint="#000000"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etdatepicker"
-            android:textColorHint="#000000"/>
-
-
-
-
-    </LinearLayout>
-
+        android:layout_height="wrap_content">
         <LinearLayout
-
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvbdate"
-                android:hint="Birth Date: "
-                android:textColorHint="#000000"
-                android:textSize="20dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-
-
-            <EditText
+            <LinearLayout
+                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/etdatepicker1"/>
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/fname"
+                    android:hint=" Name"
+                    android:singleLine="true"
+                    android:textSize="@dimen/textsize"
+                    android:textColorHint="@color/textHintcolor"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textsize"
+                        android:textColor="@color/textcolor"
+                        android:text="Birth Date"/>
+                    <EditText
+                        android:focusable="false"
+                        android:id="@+id/bdate"
+                        android:hint="Click here"
+                        android:singleLine="true"
+                        android:textColorHint="@color/textHintcolor"
+                        android:textSize="@dimen/textsize"
+                        android:textColor="@color/textcolor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/textsize"
+                        android:textColor="@color/textcolor"
+                        android:text="Gender"/>
+
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:id="@+id/gendergroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <RadioButton
+                            android:id="@+id/radioMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Male"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/radioFemale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FeMale" />
+
+                    </RadioGroup>
 
 
+                </LinearLayout>
+                <EditText
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/address"
+                    android:hint="Address"
+                    android:singleLine="false"
+                    android:textColorHint="@color/textHintcolor"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textsize"
+                        android:textColor="@color/textcolor"
+                        android:text="City"/>
+                    <Spinner
+                        android:id="@+id/spcity"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:background="@drawable/background_tab_pink"
+                        android:layout_height="wrap_content"></Spinner>
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textsize"
+                        android:textColor="@color/textcolor"
+                        android:text="Area"/>
+                    <Spinner
+                        android:id="@+id/sparea"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:background="@drawable/background_tab_pink"
+                        android:layout_height="wrap_content"></Spinner>
+                </LinearLayout>
+
+                <EditText
+                    android:inputType="number"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/weight"
+                    android:hint="Weight"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textHintcolor"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:inputType="number"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/contact"
+
+                    android:hint="Contact Number"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textHintcolor"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:enabled="false"
+                   android:focusable="false"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/email"
+                    android:hint="Email"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textHintcolor"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/password"
+                    android:hint="Password"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textHintcolor"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:password="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"
+                    android:text="Diseases"/>
+
+                <CheckBox
+                    android:id="@+id/heartd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heart Disease"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"/>
+
+                <CheckBox
+                    android:id="@+id/tb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TB"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"/>
+                <CheckBox
+                    android:id="@+id/highbp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="High Blood Pressure"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"/>
+                <CheckBox
+                    android:id="@+id/anemia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Anemia"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"/>
+                <CheckBox
+                    android:id="@+id/hiv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HIV"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/textcolor"/>
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textsize"
+                        android:textColor="@color/textcolor"
+                        android:text="Blood Group"/>
+                    <EditText
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:id="@+id/bgroup"
+                        android:hint="Blood group"
+                        android:singleLine="true"
+                        android:textColorHint="@color/textHintcolor"
+                        android:textSize="@dimen/textsize"
+                        android:textColor="@color/textcolor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/btncont"
+                    android:text="Update Profile"
+                    android:textSize="@dimen/textsize"
+                    android:textColor="@color/btntextcolor"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:background="@drawable/background_tab_pink"/>
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bgroup"
-                android:hint="Blood Group : "
-                android:textColorHint="#000000"
-                android:textSize="20dp" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinbgroup"
-                android:scrollbarAlwaysDrawVerticalTrack="@bool/abc_action_bar_expanded_action_views_exclusive"
-                android:theme="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
-
-            </Spinner>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvlocation"
-                android:hint="Location : "
-                android:textColorHint="#000000"
-                android:textSize="20dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Baroda"
-                android:id="@+id/etlocation"
-                android:textColorHint="#000000"/>
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvemail"
-                android:hint="Email : "
-                android:textColorHint="#000000"
-                android:textSize="20dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="niti1511@gmail.com"
-                android:id="@+id/etemail"
-                android:textColorHint="#000000"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvphone"
-                android:hint="Phone : "
-                android:textColorHint="#000000"
-                android:textSize="20dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:hint="8140535978"
-                android:id="@+id/etphone"
-                android:textColorHint="#000000"/>
-
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/btnUpdate"
-            android:layout_marginTop="18dp"
-            android:layout_gravity="center"
-            android:text="Update Profile"
-            android:textSize="24sp"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/background_tab_pink"/>
-
-
-
-
+    </ScrollView>
 </LinearLayout>
-</ScrollView>
-</LinearLayout>
-
-

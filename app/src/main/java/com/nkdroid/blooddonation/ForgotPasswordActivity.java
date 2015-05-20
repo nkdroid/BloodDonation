@@ -46,8 +46,8 @@ public class ForgotPasswordActivity extends ActionBarActivity {
     //public  final String SOAP_ADDRESS = "http://artist.somee.com/DPR.asmx";
     public static  final String SOAP_ADDRESS = "http://donateblood.somee.com/WebService.asmx";
 
-    private static final String username = "niravkalola1991@gmail.com";
-    private static final String password = "nkdroid007";
+    private static final String username = "oesystem1@gmail.com";
+    private static final String password = "msuniversity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +170,7 @@ public class ForgotPasswordActivity extends ActionBarActivity {
 
     private Message createMessage(String email, String subject, String messageBody, Session session) throws MessagingException, UnsupportedEncodingException {
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("niravkalola1991@gmail.com", "Blood Donation"));
+        message.setFrom(new InternetAddress("oesystem1@gmail.com", "Blood Donation"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(etUsername.getText().toString()));
 //        message.addRecipient(Message.RecipientType.TO, new InternetAddress("niravnvk@gmail.com"));
 //        message.addRecipient(Message.RecipientType.TO, new InternetAddress("nkdroidworld@gmail.com"));
