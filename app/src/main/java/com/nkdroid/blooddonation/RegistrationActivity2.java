@@ -5,8 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -61,13 +59,6 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
     private UserClass userClass;
     private String name,dob,gender,weight,contact,email,address,city,area,passwd;
 
-    private boolean isNetworkAvailable()
-    {
-        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo=connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo !=null && activeNetworkInfo.isConnected();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +96,6 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         txtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isNetworkAvailable()) {
                 if (!isProfilePicAdded) {
                     Toast.makeText(RegistrationActivity2.this, "Please Upload Proof", Toast.LENGTH_LONG).show();
                 } else {
@@ -113,11 +103,6 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                     progressDialog.setMessage("Uploading...");
                     progressDialog.show();
                     t = postImage();
-                }
-                }
-                else
-                {
-                    Toast.makeText(RegistrationActivity2.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -128,22 +113,16 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         btncontinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(isNetworkAvailable()) {
                 if (t==0) {
                     Toast.makeText(RegistrationActivity2.this, "Please Upload Proof", Toast.LENGTH_LONG).show();
                 }
                 else {
 
+
                     userClass.bgrp= bgrp.get(spbloodgroup.getSelectedItemPosition());
                     PrefUtils.setCurrentUser(userClass,RegistrationActivity2.this);
                     Intent intnt = new Intent(RegistrationActivity2.this,RegistrationActivity3.class);
                     startActivity(intnt);
-                }
-                }
-                else
-                {
-                    Toast.makeText(RegistrationActivity2.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -263,6 +242,13 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
                 if (image != null) {
                     imageView.setImageURI(Uri.parse(new File(image.getFileThumbnail()).toString()));
                     imageFilePath = image.getFilePathOriginal().toString();
+                    File file = new File(imageFilePath);
+                    File file2 = new File(imageFilePath.substring(0, imageFilePath.lastIndexOf("/")+1)+userClass.email+".jpg");
+                    boolean success = file.renameTo(file2);
+                    if(success){
+                        imageFilePath=file2.getAbsolutePath();
+//                        Toast.makeText(RegistrationActivity2.this, imageFilePath, Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -305,8 +291,9 @@ public class RegistrationActivity2 extends ActionBarActivity implements ImageCho
         new AsyncTask<Void,Void,Void>(){
             @Override
             protected Void doInBackground(Void... params) {
-                Log.e("file path: ", imageFilePath + "");
+
                 File imageFile = new File(imageFilePath);
+
                 uploadFile(imageFile);
 
                 return null;

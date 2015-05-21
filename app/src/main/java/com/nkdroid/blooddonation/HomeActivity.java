@@ -288,6 +288,7 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
 
         public class ViewHolder {
             TextView title;
+        //    TextView number;
             ImageView imgIcon;
         }
 
@@ -299,12 +300,14 @@ public class HomeActivity extends ActionBarActivity implements BaseSliderView.On
                 holder = new ViewHolder();
                 holder.title = (TextView) convertView.findViewById(R.id.txtTitle);
                 holder.imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);
+          //      holder.number=(TextView)convertView.findViewById(R.id.txtNumber);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.title.setText(arraylist[position]);
             holder.imgIcon.setImageResource(imagelist[position]);
+          //  holder.number.setText("1");
 
 
             convertView.setOnClickListener(new View.OnClickListener() {
